@@ -16,12 +16,11 @@
 static void		ft_read_dot_cor(char *av, long player_nbr, t_var *data)
 {
 	int			fd;
-	char		str1[4 + 1];
+	unsigned char		str1[4 + 1];
 	char		str2[PROG_NAME_LENGTH + 1];
-	char		str3[4 + 1];
+	unsigned char		str3[4 + 1];
 	char		str4[COMMENT_LENGTH + 1];
 	int 		test;
-	char 		*tmp;
 
 	if ((fd = open(av, O_RDWR)) < 0)
 		exit(ft_printf("wrong file and/or rights\n"));
@@ -50,16 +49,8 @@ static void		ft_read_dot_cor(char *av, long player_nbr, t_var *data)
 		write(1, str4, test);
 	}
 	write(1, "\n", 1);
-	tmp = ft_revnstr(str1, 4);
-	ft_printf("MAGIC_STR[0] = %c\n", str1[0]);
-	ft_printf("MAGIC_STR[1] = %c\n", str1[1]);
-	ft_printf("MAGIC_STR[2] = %c\n", str1[2]);
-	ft_printf("MAGIC_STR[3] = %c\n", str1[3]);
-	ft_printf("MAGIC_REV_STR = %s\n", tmp);
-	ft_printf("MAGIC = %d\n", *((int *)str1));
-	ft_printf("MAGIC_REV = %.32b\n", *tmp);
-	//ft_printf("MAGIC = %.32b\n", ((str1[0] << 24) + (str1[1] << 16) + (str1[2] << 8) + (str1[3])));
-	ft_printf("SIZE = %u\n", *((int *)str3));
+	ft_printf("MAGIC_BIT = %x\n", ((str1[0] << 24) + (str1[1] << 16) + (str1[2] << 8) + (str1[3])));
+	ft_printf("SIZE_BIT = %u\n", ((str3[0] << 24) + (str3[1] << 16) + (str3[2] << 8) + (str3[3])));
 	create_champion(data, "name_dans_.cor", player_nbr, "str_du_champ");
 }
 
