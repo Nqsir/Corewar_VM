@@ -113,6 +113,9 @@ FILES_SRC_LIBFT =  ft_atoi.c \
 		           ft_toupper.c \
 		           ft_uitoa_base.c \
 		           ft_realloc.c \
+		           ft_savetext \
+		           ft_revstr \
+		           ft_revnstr \
 		           get_next_line.c
 
 FILES_SRC_PRINTF = ft_b.c \

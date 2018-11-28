@@ -39,6 +39,7 @@ typedef struct			s_process
 typedef struct			s_champion
 {
 	char				*name;
+	char 				*code;
 	int					number;
 	unsigned long		nb_live;
 	t_process			*lst_process;
