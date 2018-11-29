@@ -15,8 +15,8 @@
 
 int				print_vm(t_var *data)
 {
-	int 	i;
-	char 	*tmp;
+	int 			i;
+	unsigned char 	*tmp;
 
 	i = 0;
 	tmp = data->virtual_machine;

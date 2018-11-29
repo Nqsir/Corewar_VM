@@ -10,7 +10,7 @@ file(GLOB_RECURSE LIBFT
         libft/libft/srcs/*.c)
 
 file(GLOB_RECURSE COREWAR
-        srcs/corewar/*.c
+        srcs/VM/*.c
         includes/*.h)
 
 include_directories(srcs)

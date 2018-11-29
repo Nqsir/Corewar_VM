@@ -37,7 +37,7 @@ int				cycle_management(t_var *data, unsigned long nb_dump)
 
 		if (nb_dump > 0 && nb_dump == data->cycle)
 		{
-			//print_vm(data);
+			print_vm(data);
 			data->stop_corewar = 1;
 		}
 		stop_corewar(data);

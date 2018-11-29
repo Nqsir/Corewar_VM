@@ -18,6 +18,7 @@
 # include "op.h"
 # include <fcntl.h>
 # define DOT_COR 778268530
+# define SIZE_INT 4
 
 typedef struct			s_reg
 {
@@ -26,7 +27,7 @@ typedef struct			s_reg
 
 typedef struct			s_process
 {
-	char				*program_counter;
+	unsigned char		*program_counter;
 	unsigned long		nbr_live;
 	unsigned long		end_op;
 	t_reg				registre[REG_NUMBER];
@@ -38,11 +39,10 @@ typedef struct			s_process
 
 typedef struct			s_champion
 {
-	char				*name;
-	char 				*code;
-	int					number;
+	int 				nbr;
 	unsigned long		nb_live;
 	t_process			*lst_process;
+	t_header			header;
 }						t_champion;
 
 typedef struct			s_op
@@ -59,7 +59,7 @@ typedef struct			s_op
 
 typedef struct			s_var
 {
-	char				*virtual_machine;
+	unsigned char		*virtual_machine;
 	t_champion			tab_champion[MAX_PLAYERS];
 	unsigned long		cycle;
 	unsigned long		check_cycle;
@@ -69,11 +69,13 @@ typedef struct			s_var
 	unsigned int		nb_champion;
 	unsigned long		stop_corewar;
 	unsigned long		dump_value;
+	size_t				padding;
+	unsigned int		pos_player;
 	t_op				op_tab[17];
 }						t_var;
 
-int						create_vm(char **virtual_machine, size_t size_vm);
-int						create_champion(t_var *data, char *name, unsigned int number, char *cor);
+int						create_vm(unsigned char **virtual_machine, size_t size_vm);
+int						create_champion(t_var *data, unsigned int number, unsigned char *cor);
 
 int						cycle_management(t_var *data, unsigned long nb_dump);
 int						cycle_to_die(t_var *data);
@@ -82,4 +84,10 @@ int						exec_program(t_var *data);
 
 
 int						print_vm(t_var *data);
+
+void					ft_count_nbr_champs(int ac, char **av, t_var *data);
+void					ft_check_arg(int ac, char **av, t_var *data);
+void					ft_control_player(long player_nbr);
+void					ft_read_dot_cor(char *av, long player_nbr, t_var *data,
+							int pos);
 #endif

@@ -13,7 +13,7 @@
 
 #include "../includes/corewar.h"
 
-int				create_vm(char **virtual_machine, size_t size_vm)
+int				create_vm(unsigned char **virtual_machine, size_t size_vm)
 {
 	if (!(*virtual_machine = ft_memalloc(size_vm)))
 	{
