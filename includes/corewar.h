@@ -25,6 +25,13 @@ typedef struct			s_reg
 	long				val: REG_SIZE * 8;
 }						t_reg;
 
+typedef struct			s_free
+{
+	int					address;
+	struct s_free		*prev;
+	struct s_free		*next;
+}						t_free;
+
 typedef struct			s_process
 {
 	unsigned char		*program_counter;
