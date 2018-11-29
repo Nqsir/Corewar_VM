@@ -18,7 +18,8 @@ static void		ft_read_str_champ(int fd, long player_nbr, t_var *data, int pos)
 	unsigned char		*str;
 	ssize_t				ret;
 
-	if (!(str = ft_memalloc(data->tab_champion[pos].header.prog_size + 1)))
+	if (!(str = my_memalloc(&data->lst_free,
+			data->tab_champion[pos].header.prog_size + 1)))
 		return ;
 	if ((ret = read(fd, str, data->tab_champion[pos].header.prog_size))
 			!= data->tab_champion[pos].header.prog_size)
@@ -38,6 +39,7 @@ static void		ft_read_str_champ(int fd, long player_nbr, t_var *data, int pos)
 		data->tab_champion[data->pos_player].header.prog_size);
 	ft_printf("COMMENT = %s\n",
 		data->tab_champion[data->pos_player].header.comment);
+	my_free(&data->lst_free, (size_t)str);
 }
 
 static size_t	ft_mem_padding(unsigned int length, unsigned int base)
