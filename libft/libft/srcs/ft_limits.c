@@ -13,18 +13,24 @@
 
 #include "libft.h"
 
-int 	ft_limits(char *str, int sign, long long limit)
+int			ft_limits(char *str, int sign, long long limit)
 {
 	long long	rev;
 	int			ilen;
-	int 		clen;
-	long 		ret;
-	long 		cmp;
+	int			clen;
+	long		ret;
+	long		cmp;
 
 	rev = -limit - 1;
 	cmp = ft_atoi(str);
-	cmp < 0 ? (ret = cmp - rev) : (ret = limit - cmp);
-	cmp < 0 ? (ilen = ft_digitlenneg(rev)) : (ilen = ft_digitlen(limit));
+	if (cmp < 0)
+		ret = cmp - rev;
+	else
+		ret = limit - cmp;
+	if (cmp < 0)
+		ilen = ft_digitlenneg(rev);
+	else
+		ilen = ft_digitlen(limit);
 	clen = ft_strlen(str);
 	if (clen > ilen || str == NULL || limit == 0 || (sign != UNSIGNED
 		&& sign != SIGNED) || (sign == UNSIGNED && cmp < 0))
@@ -32,11 +38,6 @@ int 	ft_limits(char *str, int sign, long long limit)
 	else if (clen < ilen)
 		return (0);
 	if (ret != 0)
-	{
-		if (ret < 0)
-			return (1);
-		else
-			return(0);
-	}
+		return (ret < 0 ? 1 : 0);
 	return (0);
 }

@@ -13,19 +13,23 @@
 
 #include "../includes/corewar.h"
 
-int			create_champion(t_var *data, unsigned int number, unsigned char *cor)
+int			create_champion(t_var *data, unsigned int nbr, unsigned char *cor)
 {
-
-
-	if (!(data->tab_champion[data->pos_player].lst_process = ft_memalloc(sizeof(t_process))))
+	if (!(data->tab_champion[data->pos_player].lst_process =
+			ft_memalloc(sizeof(t_process))))
 	{
 		ft_printf("Erreur create_champion\n");
 		return (EXIT_FAILURE);
 	}
 	data->tab_champion[data->pos_player].nb_live = 0;
-	data->tab_champion[data->pos_player].nbr = number;
-	data->tab_champion[data->pos_player].lst_process->registre[0].val = number;
-	data->tab_champion[data->pos_player].lst_process->program_counter = data->virtual_machine + ((MEM_SIZE / data->nb_champion) * data->pos_player);
-	ft_memcpy(data->tab_champion[data->pos_player].lst_process->program_counter, cor, data->tab_champion[data->pos_player].header.prog_size);
+	data->tab_champion[data->pos_player].nbr = nbr;
+	data->tab_champion[data->pos_player].lst_process
+		->registre[0].val = nbr;
+	data->tab_champion[data->pos_player].lst_process
+		->program_counter = data->virtual_machine + ((MEM_SIZE
+				/ data->nb_champion) * data->pos_player);
+	ft_memcpy(data->tab_champion[data->pos_player].lst_process
+		->program_counter, cor, data->tab_champion[data->pos_player].header
+		.prog_size);
 	return (EXIT_SUCCESS);
 }

@@ -32,9 +32,7 @@ int				cycle_management(t_var *data, unsigned long nb_dump)
 		ft_printf("It is now cycle : %u\n", data->cycle);
 		if (data->cycle == data->check_cycle)
 			cycle_to_die(data);
-
 		exec_program(data);
-
 		if (nb_dump > 0 && nb_dump == data->cycle)
 		{
 			print_vm(data);

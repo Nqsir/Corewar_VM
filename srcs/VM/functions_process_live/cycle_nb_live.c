@@ -13,7 +13,7 @@
 
 #include "../includes/corewar.h"
 
-int			t_process_create(t_process **new_process)
+int				t_process_create(t_process **new_process)
 {
 	if (!(*new_process = ft_memalloc(sizeof(t_process))))
 	{
@@ -23,7 +23,7 @@ int			t_process_create(t_process **new_process)
 	return (EXIT_SUCCESS);
 }
 
-static int			t_process_del(t_process **start_process, t_process **actual )
+static int		t_process_del(t_process **start_process, t_process **actual)
 {
 	t_process	*p_prev;
 	t_process	*p_next;
@@ -69,14 +69,15 @@ static int		action_cycle_process(t_var *data)
 {
 	if (data->nb_live >= NBR_LIVE || !data->check_max_check)
 	{
-		ft_printf("CYCLE_TO_DIE     [OK]          : %u\n", data->check_cycle_delta);
+		ft_printf("CYCLE_TO_DIE\t[OK]\t: %u\n", data->check_cycle_delta);
 		data->check_cycle_delta -= CYCLE_DELTA;
 		data->check_cycle += data->check_cycle_delta;
 		data->check_max_check = MAX_CHECKS - 1;
 	}
 	else
 	{
-		ft_printf("CYCLE_TO_DIE     [RESTART %i]     : %u\n",data->check_max_check, data->check_cycle_delta);
+		ft_printf("CYCLE_TO_DIE\t[RESTART %i]\t: %u\n", data->check_max_check,
+			data->check_cycle_delta);
 		data->check_max_check--;
 		data->check_cycle += data->check_cycle_delta;
 	}
@@ -90,7 +91,6 @@ int				cycle_to_die(t_var *data)
 	t_process	*p_process;
 
 	i = 0;
-
 	while (i < data->nb_champion)
 	{
 		p_process = data->tab_champion[i].lst_process;

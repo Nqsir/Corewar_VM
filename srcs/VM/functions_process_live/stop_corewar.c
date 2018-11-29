@@ -26,7 +26,8 @@ int				stop_corewar(t_var *data)
 			nb_proces++;
 		i++;
 	}
-	if (nb_proces == 1 || ((data->check_cycle_delta + CYCLE_DELTA) < data->check_cycle_delta))
+	if (nb_proces == 1 || ((data->check_cycle_delta + CYCLE_DELTA) <
+		data->check_cycle_delta))
 		data->stop_corewar = 1;
 	return (EXIT_SUCCESS);
 }

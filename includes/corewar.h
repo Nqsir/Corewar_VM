@@ -34,12 +34,12 @@ typedef struct			s_process
 	int					carry;
 	struct s_process	*next;
 	struct s_process	*prev;
-	int 				flag;
+	int					flag;
 }						t_process;
 
 typedef struct			s_champion
 {
-	int 				nbr;
+	int					nbr;
 	unsigned long		nb_live;
 	t_process			*lst_process;
 	t_header			header;
@@ -74,17 +74,15 @@ typedef struct			s_var
 	t_op				op_tab[17];
 }						t_var;
 
-int						create_vm(unsigned char **virtual_machine, size_t size_vm);
-int						create_champion(t_var *data, unsigned int number, unsigned char *cor);
-
+int						create_vm(unsigned char **virtual_machine,
+							size_t size_vm);
+int						create_champion(t_var *data, unsigned int number,
+							unsigned char *cor);
 int						cycle_management(t_var *data, unsigned long nb_dump);
 int						cycle_to_die(t_var *data);
 int						stop_corewar(t_var *data);
 int						exec_program(t_var *data);
-
-
 int						print_vm(t_var *data);
-
 void					ft_count_nbr_champs(int ac, char **av, t_var *data);
 void					ft_check_arg(int ac, char **av, t_var *data);
 void					ft_control_player(long player_nbr);

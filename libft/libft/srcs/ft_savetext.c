@@ -13,9 +13,10 @@
 
 #include "libft.h"
 
-char    *ft_savetext(char **savetext, char *line)
+char		*ft_savetext(char **savetext, char *line)
 {
-	char *tmpfree;
+	char	*tmpfree;
+
 	if (*savetext == NULL)
 	{
 		*savetext = (char*)malloc(sizeof(char) * 1);
