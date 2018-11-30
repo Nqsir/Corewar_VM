@@ -13,17 +13,17 @@
 
 #include "corewar.h"
 
-void			*my_memalloc(t_free **lst_free, size_t size)
+void				*my_memalloc(t_free **lst_free, size_t size)
 {
 	void		*rep;
 	t_free		*link;
 
 	if (!(rep = ft_memalloc(size)))
-		exit(ft_printf("erreur memalloc_data\n"));
+		exit(my_exit(lst_free, __FILE__, (char *)__func__, __LINE__));
 	if (!(link = ft_memalloc(sizeof(t_free))))
 	{
 		free(rep);
-		exit(ft_printf("erreur memalloc_my_free\n"));
+		exit(my_exit(lst_free, __FILE__, (char *)__func__, __LINE__));
 	}
 	if (!*lst_free)
 	{
@@ -72,7 +72,7 @@ static void			my_free_2(t_free **lst_free, size_t address)
 	else if (prev && (*lst_free)->next)
 		my_free_3(lst_free, first, prev);
 	else
-		exit(ft_printf("ON MY_FREE PAS QUAND ON A PAS MY_MALLOC PTNNNN !\n"));
+		exit(my_exit(lst_free, __FILE__, (char *)__func__, __LINE__));
 }
 
 void				my_free(t_free **lst_free, size_t address)
@@ -90,7 +90,7 @@ void				my_free(t_free **lst_free, size_t address)
 		my_free_2(lst_free, address);
 }
 
-void			my_auto_free(t_free **lst_free)
+void				my_auto_free(t_free **lst_free)
 {
 	t_free	*tmp;
 
@@ -104,11 +104,4 @@ void			my_auto_free(t_free **lst_free)
 		free(*lst_free);
 		(*lst_free) = tmp;
 	}
-}
-
-int				my_exit(t_free **lst_free, char *file, char *func, int line)
-{
-	ft_printf("ERROR :\n\tFILE\t : %s\n\tFUNCTION : %s\n\tLINE\t : (%d)\n", file, func, line);
-	my_auto_free(lst_free);
-	return (EXIT_FAILURE);
 }

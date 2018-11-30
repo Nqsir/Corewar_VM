@@ -31,7 +31,7 @@ void	ft_count_nbr_champs(int ac, char **av, t_var *data)
 		n++;
 	}
 	if (data->nb_champion > MAX_PLAYERS)
-		exit(ft_printf("This is Corewar NOT SPARTAAAAAAAAAAA\n"));
+		exit(my_exit(&data->lst_free, __FILE__, (char *)__func__, __LINE__));
 	if (data->nb_champion == 0)
-		exit(ft_printf("ALONE IN THE DARK ISN'T APPROPRIATE HERE !\n"));
+		exit(my_exit(&data->lst_free, __FILE__, (char *)__func__, __LINE__));
 }

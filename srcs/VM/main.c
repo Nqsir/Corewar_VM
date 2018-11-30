@@ -47,7 +47,6 @@ int				main(int ac, char **av)
 	ft_init_data_corewar(&data);
 	ft_count_nbr_champs(ac, av, &data);
 	create_vm(&data, &data.virtual_machine, MEM_SIZE);
-	ft_printf("data.champ = %d\n", data.nb_champion);
 	ft_check_arg(ac, av, &data);
 	cycle_management(&data, data.dump_value);
 	my_auto_free(&data.lst_free);

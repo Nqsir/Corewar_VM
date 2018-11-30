@@ -92,7 +92,7 @@ int						exec_program(t_var *data);
 int						print_vm(t_var *data);
 void					ft_count_nbr_champs(int ac, char **av, t_var *data);
 void					ft_check_arg(int ac, char **av, t_var *data);
-void					ft_control_player(long player_nbr);
+void					ft_control_player(t_var *data, long player_nbr);
 void					ft_read_dot_cor(char *av, long player_nbr, t_var *data,
 							int pos);
 void					*my_memalloc(t_free **lst_free, size_t size);

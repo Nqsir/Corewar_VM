@@ -23,7 +23,8 @@ int				t_process_create(t_var *data, t_process **new_process)
 	return (EXIT_SUCCESS);
 }
 
-static int		t_process_del(t_var *data, t_process **start_process, t_process **actual)
+static int		t_process_del(t_var *data, t_process **start_process,
+					t_process **actual)
 {
 	t_process	*p_prev;
 	t_process	*p_next;
