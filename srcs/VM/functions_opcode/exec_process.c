@@ -23,10 +23,10 @@ static void		ft_nbr_live_op_code(t_process *p_process)
 	}
 }
 
-static void		ft_no_flag_p_process(t_process *p_process, t_var *data)
+static void		ft_no_flag_p_process(t_process **p_process, t_var *data)
 {
-	p_process->flag = 1;
-	p_process->end_op = data->cycle + 25 - 1; //data->op_tab[].cycle;
+	(*p_process)->flag = 1;
+	(*p_process)->end_op = data->cycle + 25 - 1; //data->op_tab[].cycle;
 }
 
 int				exec_program(t_var *data)
@@ -41,7 +41,7 @@ int				exec_program(t_var *data)
 		while (p_process)
 		{
 			if (!p_process->flag)
-				ft_no_flag_p_process(p_process, data);
+				ft_no_flag_p_process(&p_process, data);
 			else if (p_process->end_op == data->cycle)
 				ft_nbr_live_op_code(p_process);
 			p_process = p_process->next;

@@ -28,7 +28,6 @@ typedef struct			s_reg
 typedef struct			s_free
 {
 	size_t				address;
-	struct s_free		*prev;
 	struct s_free		*next;
 }						t_free;
 
@@ -82,7 +81,7 @@ typedef struct			s_var
 	t_free				*lst_free;
 }						t_var;
 
-int						create_vm(unsigned char **virtual_machine,
+int						create_vm(t_var *data, unsigned char **virtual_machine,
 							size_t size_vm);
 int						create_champion(t_var *data, unsigned int number,
 							unsigned char *cor);
@@ -96,8 +95,11 @@ void					ft_check_arg(int ac, char **av, t_var *data);
 void					ft_control_player(long player_nbr);
 void					ft_read_dot_cor(char *av, long player_nbr, t_var *data,
 							int pos);
-void					*my_memalloc(t_free *lst_free, size_t size);
-//int						my_free(t_free **lst_free, size_t address);
-//int						my_auto_free(t_free **lst_free);
-//int						my_exit(t_free **lst_free, int num, char *msg);
+void					*my_memalloc(t_free **lst_free, size_t size);
+void					my_free(t_free **lst_free, size_t address);
+void					my_auto_free(t_free **lst_free);
+int						my_exit(t_free **lst_free, char *file, char *func,
+							int line);
+
+int						t_process_create(t_var *data, t_process **new_process);
 #endif

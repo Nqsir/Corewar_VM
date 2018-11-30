@@ -22,7 +22,7 @@ static void		ft_read_str_champ(int fd, long player_nbr, t_var *data, int pos)
 			data->tab_champion[pos].header.prog_size + 1)))
 		return ;
 	if ((ret = read(fd, str, data->tab_champion[pos].header.prog_size))
-			!= data->tab_champion[pos].header.prog_size)
+		!= data->tab_champion[pos].header.prog_size)
 		exit(ft_printf("[%d][%d]\n"));
 	if (ret > CHAMP_MAX_SIZE)
 		exit(ft_printf("(%d bytes > %d bytes)\n"));

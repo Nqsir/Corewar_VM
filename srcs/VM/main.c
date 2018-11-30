@@ -24,6 +24,8 @@ static void		ft_init_data_corewar(t_var *data)
 	data->nb_champion = 0;
 	data->stop_corewar = 0;
 	data->dump_value = 0;
+	data->pos_player = 0;
+	data->lst_free = NULL;
 }
 
 static void		ft_print_usage(void)
@@ -44,10 +46,10 @@ int				main(int ac, char **av)
 		ft_print_usage();
 	ft_init_data_corewar(&data);
 	ft_count_nbr_champs(ac, av, &data);
-	create_vm(&data.virtual_machine, MEM_SIZE);
+	create_vm(&data, &data.virtual_machine, MEM_SIZE);
 	ft_printf("data.champ = %d\n", data.nb_champion);
 	ft_check_arg(ac, av, &data);
 	cycle_management(&data, data.dump_value);
-	free(data.virtual_machine);
+	my_auto_free(&data.lst_free);
 	return (EXIT_SUCCESS);
 }

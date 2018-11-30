@@ -13,9 +13,9 @@
 
 #include "../includes/corewar.h"
 
-int				t_process_create(t_process **new_process)
+int				t_process_create(t_var *data, t_process **new_process)
 {
-	if (!(*new_process = ft_memalloc(sizeof(t_process))))
+	if (!(*new_process = my_memalloc(&data->lst_free, sizeof(t_process))))
 	{
 		ft_printf("Erreur t_process_create\n");
 		return (EXIT_FAILURE);
@@ -23,7 +23,7 @@ int				t_process_create(t_process **new_process)
 	return (EXIT_SUCCESS);
 }
 
-static int		t_process_del(t_process **start_process, t_process **actual)
+static int		t_process_del(t_var *data, t_process **start_process, t_process **actual)
 {
 	t_process	*p_prev;
 	t_process	*p_next;
@@ -42,7 +42,7 @@ static int		t_process_del(t_process **start_process, t_process **actual)
 	}
 	else if (p_prev && !p_next)
 		p_prev->next = NULL;
-	free(*actual);
+	my_free(&data->lst_free, (size_t)*actual);
 	return (EXIT_SUCCESS);
 }
 
@@ -97,9 +97,8 @@ int				cycle_to_die(t_var *data)
 		while (p_process)
 		{
 			if (!p_process->nbr_live)
-			{
-				t_process_del(&data->tab_champion[i].lst_process, &p_process);
-			}
+				t_process_del(data, &data->tab_champion[i].lst_process,
+					&p_process);
 			else
 				data->tab_champion[i].nb_live += p_process->nbr_live;
 			p_process = p_process->next;

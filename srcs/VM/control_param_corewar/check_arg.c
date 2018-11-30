@@ -25,7 +25,7 @@ static void		ft_check_champ(char **av, long len, int n, t_var *data)
 	{
 		if (!ft_strisdigit_pos_neg(av[n - 1]) || ft_limits(av[n - 1],
 				SIGNED, INT_MAX))
-			exit(ft_printf("Come on, #Brain_Install <limits.h> FFS\n"));
+			exit(my_exit(&data->lst_free, __FILE__, (char *)__func__, __LINE__));
 		check_nbr = ft_atoi(av[n - 1]);
 		len = ft_strlen(av[n]);
 		check_nbr >= player_nbr ? (player_nbr = check_nbr) :
@@ -39,10 +39,10 @@ static void		ft_check_champ(char **av, long len, int n, t_var *data)
 	player_nbr++;
 }
 
-static void		ft_check_visu(int *v)
+static void		ft_check_visu(t_var *data, int *v)
 {
 	if (*v > 0)
-		exit(ft_printf("One was enough... *That's what she said !* XD\n"));
+		exit(my_exit(&data->lst_free, __FILE__, (char *)__func__, __LINE__));
 	*v += 1;
 	ft_printf("FAUT L'VISUUUUUUUUUUUU\n");
 }
@@ -78,7 +78,7 @@ void			ft_check_arg(int ac, char **av, t_var *data)
 		if (!ft_strcmp(av[n], "-dump"))
 			ft_check_dump(++n, av, &dump, data);
 		else if (!ft_strcmp(av[n], "-v"))
-			ft_check_visu(&v);
+			ft_check_visu(data, &v);
 		else if ((len = ft_strlen(av[n])) > 4)
 			ft_check_champ(av, len, n, data);
 		else if (!ft_strcmp(av[n], "-n"))

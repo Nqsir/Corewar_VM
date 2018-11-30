@@ -12,159 +12,103 @@
 /* ************************************************************************** */
 
 #include "corewar.h"
-/*
+
 void			*my_memalloc(t_free **lst_free, size_t size)
 {
 	void		*rep;
 	t_free		*link;
 
 	if (!(rep = ft_memalloc(size)))
-		ft_printf("erreur memalloc_data\n");
+		exit(ft_printf("erreur memalloc_data\n"));
 	if (!(link = ft_memalloc(sizeof(t_free))))
 	{
 		free(rep);
-		ft_printf("erreur memalloc_my_free\n");
+		exit(ft_printf("erreur memalloc_my_free\n"));
 	}
-	if (!(*lst_free))
+	if (!*lst_free)
 	{
-		ft_printf("============>>>>>>>>>>>>>in?\n");
-		link->next = NULL;
-		link->prev = NULL;
 		link->address = (size_t)rep;
-		(*lst_free) = link;
+		*lst_free = link;
 	}
 	else
 	{
 		link->address = (size_t)rep;
-		link->next = (*lst_free);
-		(*lst_free)->prev = link;
-		(*lst_free) = link;
-
-	//	link->address = (size_t)rep;
-	//	(*lst_free)->prev = link;
-	//	tmp_actu = (*lst_free);
-	//	(*lst_free) = (*lst_free)->prev;
-	//	(*lst_free)->next = tmp_actu;
+		link->next = *lst_free;
+		*lst_free = link;
 	}
-	ft_printf("link->address = %x\n", link->address);
-	ft_printf("(*lst_free)->prev %s\n", (*lst_free)->prev);
-	ft_printf("(*lst_free)->next %s\n", (*lst_free)->next);
 	return (rep);
 }
 
-int				my_free(t_free **lst_free, size_t address)
+static void			my_free_3(t_free **lst_free, t_free *f, t_free *p)
 {
-	t_free	*elem;
-	t_free	*elem_prev;
-	t_free	*elem_next;
+	t_free		*tmp;
 
-	elem = *lst_free;
-	while (elem && elem->address != address)
-		elem = elem->next;
-	ft_printf("elem->address = %x\n", elem->address);
-	if (elem && elem->address == address)
-	{
-		elem_prev = elem->prev;
-		elem_next = elem->next;
-		ft_printf("elem_prev %s\n", elem_prev);
-		ft_printf("elem_next %s\n", elem_next);
-		free((void *)elem->address);
-		elem_prev->next = elem_next;
-		elem_next->prev = elem_prev;
-		free(elem);
-		return (EXIT_SUCCESS);
-	}
-	ft_printf("erreur my_free\n");
-	return (EXIT_FAILURE);
+	tmp = (*lst_free)->next;
+	p->next = tmp;
+	free((void *)(*lst_free)->address);
+	free(*lst_free);
+	*lst_free = f;
 }
 
-int				my_auto_free(t_free **lst_free)
+static void			my_free_2(t_free **lst_free, size_t address)
 {
-	t_free	*start;
-	t_free	*tmp_actu;
+	t_free		*first;
+	t_free		*prev;
 
-	start = *lst_free;
-	while (start)
+	first = *lst_free;
+	prev = NULL;
+	while (*lst_free && (*lst_free)->address != address)
 	{
-		tmp_actu = start;
-		start = start->prev;
-		free(tmp_actu);
+		prev = *lst_free;
+		*lst_free = (*lst_free)->next;
 	}
-	return (EXIT_SUCCESS);
+	if (prev && !(*lst_free)->next)
+	{
+		free((void *)(*lst_free)->address);
+		free(*lst_free);
+		prev->next = NULL;
+		*lst_free = first;
+	}
+	else if (prev && (*lst_free)->next)
+		my_free_3(lst_free, first, prev);
+	else
+		exit(ft_printf("ON MY_FREE PAS QUAND ON A PAS MY_MALLOC PTNNNN !\n"));
 }
 
-int				my_exit(t_free **lst_free, int num, char *msg)
+void				my_free(t_free **lst_free, size_t address)
 {
-	ft_printf("%s\n", msg);
+	t_free		*tmp;
+
+	if ((*lst_free)->address == address)
+	{
+		tmp = (*lst_free)->next;
+		free((void *)(*lst_free)->address);
+		free(*lst_free);
+		*lst_free = tmp;
+	}
+	else
+		my_free_2(lst_free, address);
+}
+
+void			my_auto_free(t_free **lst_free)
+{
+	t_free	*tmp;
+
+	while ((*lst_free))
+	{
+		if ((*lst_free)->next)
+			tmp = (*lst_free)->next;
+		else
+			tmp = NULL;
+		free((void *)(*lst_free)->address);
+		free(*lst_free);
+		(*lst_free) = tmp;
+	}
+}
+
+int				my_exit(t_free **lst_free, char *file, char *func, int line)
+{
+	ft_printf("ERROR :\n\tFILE\t : %s\n\tFUNCTION : %s\n\tLINE\t : (%d)\n", file, func, line);
 	my_auto_free(lst_free);
-	return (num);
-}
-*/
-
-t_free     *ft_delfirst(t_free *malist)
-{
-	t_free *tmp;
-	if (malist != NULL)
-	{
-		tmp = malist;
-		tmp = tmp->next;
-		free((void *)malist->address);
-		free(malist);
-		return (tmp);
-	}
-	return (NULL);
-}
-t_free     *ft_delend(t_free *malist)
-{
-	t_free *tmpone;
-	t_free *tmptwo;
-	if (malist == NULL)
-	{
-		return (NULL);
-	}
-	if (malist->next == NULL)
-	{
-		free((void *)malist->address);
-		free(malist);
-		return (NULL);
-	}
-	tmpone = malist;
-	tmptwo = malist;
-	while (tmpone->next != NULL)
-	{
-		tmptwo = tmpone;
-		tmpone = tmpone->next;
-	}
-	tmptwo->next = NULL;
-	free(tmpone);
-	return (malist);
-}
-
-t_free		*ft_lstsupdel(t_free *malist, size_t address)
-{
-	t_free *elem;
-
-	elem = malist;
-	while (elem && elem->address != address)
-		elem = elem->next;
-	if (elem->prev == NULL)
-		return (ft_delfirst(malist));
-	if (elem->next == NULL)
-		return (ft_delend(malist));
-
-	elem->prev->next = elem->next;
-	free((void *)elem->address);
-	free(elem);
-	return(malist);
-}
-
-void     *my_memalloc(t_free *malist, size_t address)
-{
-	t_free *maillon;
-	maillon = (t_free*)malloc(sizeof(t_free));
-	if (maillon == NULL)
-		return (NULL);
-	maillon->address = address;
-	maillon->next = malist;
-	return (maillon);
+	return (EXIT_FAILURE);
 }

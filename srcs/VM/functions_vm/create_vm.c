@@ -13,12 +13,11 @@
 
 #include "../includes/corewar.h"
 
-int				create_vm(unsigned char **virtual_machine, size_t size_vm)
+int				create_vm(t_var *data, unsigned char **virtual_machine,
+					size_t size_vm)
 {
-	if (!(*virtual_machine = ft_memalloc(size_vm)))
-	{
+	if (!(*virtual_machine = my_memalloc(&data->lst_free, size_vm)))
 		return (EXIT_FAILURE);
-	}
 	ft_bzero(*virtual_machine, size_vm);
 	return (EXIT_SUCCESS);
 }
