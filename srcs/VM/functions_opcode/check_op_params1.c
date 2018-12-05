@@ -13,7 +13,7 @@
 
 #include "../includes/corewar.h"
 
-int				opcode_ld(t_var *data, unsigned char *pc)
+int				check_ld(t_var *data, unsigned char *pc)
 {
 	unsigned char	p_1;
 	unsigned char	p_2;
@@ -35,7 +35,7 @@ int				opcode_ld(t_var *data, unsigned char *pc)
 	return (EXIT_SUCCESS);
 }
 
-int				opcode_ldi(t_var *data, unsigned char *pc)
+int				check_ldi(t_var *data, unsigned char *pc)
 {
 	unsigned char	p_1;
 	unsigned char	p_2;
@@ -57,7 +57,7 @@ int				opcode_ldi(t_var *data, unsigned char *pc)
 	return (EXIT_SUCCESS);
 }
 
-int				opcode_lld(t_var *data, unsigned char *pc)
+int				check_lld(t_var *data, unsigned char *pc)
 {
 	unsigned char	p_1;
 	unsigned char	p_2;
@@ -79,7 +79,7 @@ int				opcode_lld(t_var *data, unsigned char *pc)
 	return (EXIT_SUCCESS);
 }
 
-int				opcode_lldi(t_var *data, unsigned char *pc)
+int				check_lldi(t_var *data, unsigned char *pc)
 {
 	unsigned char	p_1;
 	unsigned char	p_2;

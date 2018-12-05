@@ -13,7 +13,7 @@
 
 #include "../includes/corewar.h"
 
-int				opcode_lfork(t_var *data, unsigned char *pc)
+int				check_lfork(t_var *data, unsigned char *pc)
 {
 	unsigned char	p_1;
 	unsigned char	p_2;
@@ -29,7 +29,7 @@ int				opcode_lfork(t_var *data, unsigned char *pc)
 	return (EXIT_SUCCESS);
 }
 
-int				opcode_live(t_var *data, unsigned char *pc)
+int				check_live(t_var *data, unsigned char *pc)
 {
 	unsigned char	p_1;
 	unsigned char	p_2;
@@ -45,7 +45,7 @@ int				opcode_live(t_var *data, unsigned char *pc)
 	return (EXIT_SUCCESS);
 }
 
-int				opcode_or(t_var *data, unsigned char *pc)
+int				check_or(t_var *data, unsigned char *pc)
 {
 	unsigned char	p_1;
 	unsigned char	p_2;
@@ -61,7 +61,7 @@ int				opcode_or(t_var *data, unsigned char *pc)
 	return (EXIT_SUCCESS);
 }
 
-int				opcode_st(t_var *data, unsigned char *pc)
+int				check_st(t_var *data, unsigned char *pc)
 {
 	unsigned char	p_1;
 	unsigned char	p_2;

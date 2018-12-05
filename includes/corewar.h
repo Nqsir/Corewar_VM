@@ -101,23 +101,22 @@ void					my_free(t_free **lst_free, size_t address);
 void					my_auto_free(t_free **lst_free);
 int						my_exit(t_free **lst_free, char *file, char *func,
 							int line);
-int						opcode_add(t_var *data, unsigned char *pc);
-
 int						t_process_create(t_var *data, t_process **new_process);
-int						opcode_aff(t_var *data, unsigned char *pc);
-int						opcode_and(t_var *data, unsigned char *pc);
-int						opcode_fork(t_var *data, unsigned char *pc);
-int						opcode_ld(t_var *data, unsigned char *pc);
-int						opcode_ldi(t_var *data, unsigned char *pc);
-int						opcode_lld(t_var *data, unsigned char *pc);
-int						opcode_lldi(t_var *data, unsigned char *pc);
-int						opcode_lfork(t_var *data, unsigned char *pc);
-int						opcode_live(t_var *data, unsigned char *pc);
-int						opcode_or(t_var *data, unsigned char *pc);
-int						opcode_st(t_var *data, unsigned char *pc);
-int						opcode_sti(t_var *data, unsigned char *pc);
-int						opcode_sub(t_var *data, unsigned char *pc);
-int						opcode_xor(t_var *data, unsigned char *pc);
-int						opcode_zjmp(t_var *data, unsigned char *pc);
+int						check_add(t_var *data, unsigned char *pc);
+int						check_aff(t_var *data, unsigned char *pc);
+int						check_and(t_var *data, unsigned char *pc);
+int						check_fork(t_var *data, unsigned char *pc);
+int						check_ld(t_var *data, unsigned char *pc);
+int						check_ldi(t_var *data, unsigned char *pc);
+int						check_lld(t_var *data, unsigned char *pc);
+int						check_lldi(t_var *data, unsigned char *pc);
+int						check_lfork(t_var *data, unsigned char *pc);
+int						check_live(t_var *data, unsigned char *pc);
+int						check_or(t_var *data, unsigned char *pc);
+int						check_st(t_var *data, unsigned char *pc);
+int						check_sti(t_var *data, unsigned char *pc);
+int						check_sub(t_var *data, unsigned char *pc);
+int						check_xor(t_var *data, unsigned char *pc);
+int						check_zjmp(t_var *data, unsigned char *pc);
 
 #endif

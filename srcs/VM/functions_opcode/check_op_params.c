@@ -13,7 +13,7 @@
 
 #include "../includes/corewar.h"
 
-int				opcode_add(t_var *data, unsigned char *pc)
+int				check_add(t_var *data, unsigned char *pc)
 {
 	unsigned char	p_1;
 	unsigned char	p_2;
@@ -29,7 +29,7 @@ int				opcode_add(t_var *data, unsigned char *pc)
 	return (EXIT_SUCCESS);
 }
 
-int				opcode_aff(t_var *data, unsigned char *pc)
+int				check_aff(t_var *data, unsigned char *pc)
 {
 	unsigned char	p_1;
 	unsigned char	p_2;
@@ -45,7 +45,7 @@ int				opcode_aff(t_var *data, unsigned char *pc)
 	return (EXIT_SUCCESS);
 }
 
-int				opcode_and(t_var *data, unsigned char *pc)
+int				check_and(t_var *data, unsigned char *pc)
 {
 	unsigned char	p_1;
 	unsigned char	p_2;
@@ -61,7 +61,7 @@ int				opcode_and(t_var *data, unsigned char *pc)
 	return (EXIT_SUCCESS);
 }
 
-int				opcode_fork(t_var *data, unsigned char *pc)
+int				check_fork(t_var *data, unsigned char *pc)
 {
 	unsigned char	p_1;
 	unsigned char	p_2;

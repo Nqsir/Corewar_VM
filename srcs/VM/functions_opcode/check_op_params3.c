@@ -13,7 +13,7 @@
 
 #include "../includes/corewar.h"
 
-int				opcode_sti(t_var *data, unsigned char *pc)
+int				check_sti(t_var *data, unsigned char *pc)
 {
 	unsigned char	p_1;
 	unsigned char	p_2;
@@ -35,7 +35,7 @@ int				opcode_sti(t_var *data, unsigned char *pc)
 	return (EXIT_SUCCESS);
 }
 
-int				opcode_sub(t_var *data, unsigned char *pc)
+int				check_sub(t_var *data, unsigned char *pc)
 {
 	unsigned char	p_1;
 	unsigned char	p_2;
@@ -51,7 +51,7 @@ int				opcode_sub(t_var *data, unsigned char *pc)
 	return (EXIT_SUCCESS);
 }
 
-int				opcode_xor(t_var *data, unsigned char *pc)
+int				check_xor(t_var *data, unsigned char *pc)
 {
 	unsigned char	p_1;
 	unsigned char	p_2;
@@ -67,7 +67,7 @@ int				opcode_xor(t_var *data, unsigned char *pc)
 	return (EXIT_SUCCESS);
 }
 
-int				opcode_zjmp(t_var *data, unsigned char *pc)
+int				check_zjmp(t_var *data, unsigned char *pc)
 {
 	unsigned char	p_1;
 	unsigned char	p_2;
