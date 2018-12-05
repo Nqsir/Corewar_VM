@@ -13,6 +13,15 @@
 
 #include "corewar.h"
 
+/*
+void 			ft_params_opcode(t_var *data, unsigned char *pc, int dir_oct,
+				int idx)
+{
+	if (idx)
+		%IDX_MOD;
+	%MEM_SIZE;
+}
+*/
 static void		ft_init_data_corewar(t_var *data)
 {
 	data->virtual_machine = NULL;

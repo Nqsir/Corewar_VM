@@ -16,42 +16,42 @@
 int				tab_opcod_1(t_var *data, unsigned long i)
 {
 	if (*data->tab_champion[i].lst_process->program_counter == 0x04 )
-		opcode_add();
+		opcode_add(data, *data->tab_champion[i].lst_process->program_counter);
 	else if (*data->tab_champion[i].lst_process->program_counter == 0x10 )
-		opcode_aff();
+		opcode_aff(data, *data->tab_champion[i].lst_process->program_counter);
 	else if (*data->tab_champion[i].lst_process->program_counter == 0x06 )
-		opcode_and();
+		opcode_and(data, *data->tab_champion[i].lst_process->program_counter);
 	else if (*data->tab_champion[i].lst_process->program_counter == 0x0c )
-		opcode_fork();
+		opcode_fork(data, *data->tab_champion[i].lst_process->program_counter);
 	else if (*data->tab_champion[i].lst_process->program_counter == 0x02 )
-		opcode_ld();
+		opcode_ld(data, *data->tab_champion[i].lst_process->program_counter);
 	else if (*data->tab_champion[i].lst_process->program_counter == 0x0a )
-		opcode_ldi();
+		opcode_ldi(data, *data->tab_champion[i].lst_process->program_counter);
 	else if (*data->tab_champion[i].lst_process->program_counter == 0x0d )
-		opcode_lld();
+		opcode_lld(data, *data->tab_champion[i].lst_process->program_counter);
 	else if (*data->tab_champion[i].lst_process->program_counter == 0x0e )
-		opcode_lldi();
+		opcode_lldi(data, *data->tab_champion[i].lst_process->program_counter);
 	return (EXIT_SUCCESS);
 }
 
 int				tab_opcod_2(t_var *data, unsigned long i)
 {
 	if (*data->tab_champion[i].lst_process->program_counter == 0x0f )
-		opcode_lfork();
+		opcode_lfork(data, *data->tab_champion[i].lst_process->program_counter);
 	else if (*data->tab_champion[i].lst_process->program_counter == 0x01 )
-		opcode_live();
+		opcode_live(data, *data->tab_champion[i].lst_process->program_counter);
 	else if (*data->tab_champion[i].lst_process->program_counter == 0x07 )
-		opcode_or();
+		opcode_or(data, *data->tab_champion[i].lst_process->program_counter);
 	else if (*data->tab_champion[i].lst_process->program_counter == 0x0a )
-		opcode_st();
+		opcode_st(data, *data->tab_champion[i].lst_process->program_counter);
 	else if (*data->tab_champion[i].lst_process->program_counter == 0x03 )
-		opcode_sti();
+		opcode_sti(data, *data->tab_champion[i].lst_process->program_counter);
 	else if (*data->tab_champion[i].lst_process->program_counter == 0x0b )
-		opcode_sub();
+		opcode_sub(data, *data->tab_champion[i].lst_process->program_counter);
 	else if (*data->tab_champion[i].lst_process->program_counter == 0x05 )
-		opcode_xor();
+		opcode_xor(data, *data->tab_champion[i].lst_process->program_counter);
 	else if (*data->tab_champion[i].lst_process->program_counter == 0x08 )
-		opcode_zjmp();
+		opcode_zjmp(data, *data->tab_champion[i].lst_process->program_counter);
 	return (EXIT_SUCCESS);
 }
 */

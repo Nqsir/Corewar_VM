@@ -11,12 +11,12 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
-# include "corewar.h"
+#include "corewar.h"
 
-int					my_exit(t_free **lst_free, char *file, char *func, int line)
+int			my_exit(t_free **lst_free, char *file, char *func, int line)
 {
 	ft_printf("ERROR :\n\tFILE\t : %s\n\tFUNCTION : %s\n\tLINE\t : (%d)\n",
-			  file, func, line);
+		file, func, line);
 	my_auto_free(lst_free);
 	return (EXIT_FAILURE);
 }
