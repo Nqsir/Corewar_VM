@@ -14,11 +14,13 @@
 #include "corewar.h"
 
 void 			ft_params_opcode(t_var *data, unsigned char *pc, int dir_oct,
-				int idx)
+					int idx)
 {
-	if (idx)
-		%IDX_MOD;
-	%MEM_SIZE;
+	if (pc[1] << 6)
+
+	//if (idx)
+	//	%IDX_MOD;
+	//%MEM_SIZE;
 }
 
 static void		ft_init_data_corewar(t_var *data)
@@ -49,10 +51,15 @@ static void		ft_print_usage(void)
 int				main(int ac, char **av)
 {
 	t_var	data;
+	unsigned char test[3];
 
+	test[0] = 60;
+	test[1] = 61;
+	test[2] = 160;
 	if (ac == 1)
 		ft_print_usage();
 	ft_init_data_corewar(&data);
+//	ft_params_opcode(t_var *data, unsigned char *pc, int dir_oct, int idx)
 	ft_count_nbr_champs(ac, av, &data);
 	create_vm(&data, &data.virtual_machine, MEM_SIZE);
 	ft_check_arg(ac, av, &data);

@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   corewar.h                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     */
+/*   By: vsteyaer <vsteyaer@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/10/09 12:02:53 by fablin       #+#   ##    ##    #+#       */
-/*   Updated: 2018/10/11 15:41:12 by fablin      ###    #+. /#+    ###.fr     */
+/*   Created: 2018/12/06 14:39:03 by vsteyaer     #+#   ##    ##    #+#       */
+/*   Updated: 2018/12/06 14:39:03 by vsteyaer    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -79,7 +79,7 @@ typedef struct			s_var
 	unsigned int		pos_player;
 	t_op				op_tab[17];
 	t_free				*lst_free;
-	int					t_params[3][2];
+	int					t_params[2][3];
 }						t_var;
 
 int						create_vm(t_var *data, unsigned char **virtual_machine,
