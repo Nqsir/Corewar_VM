@@ -12,46 +12,46 @@
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
-/*
-int				tab_opcod_1(t_var *data, unsigned long i)
+
+int				tab_opcode_1(t_var *data, t_process *p_process)
 {
-	if (*data->tab_champion[i].lst_process->program_counter == 0x04 )
-		opcode_add(data, *data->tab_champion[i].lst_process->program_counter);
-	else if (*data->tab_champion[i].lst_process->program_counter == 0x10 )
-		opcode_aff(data, *data->tab_champion[i].lst_process->program_counter);
-	else if (*data->tab_champion[i].lst_process->program_counter == 0x06 )
-		opcode_and(data, *data->tab_champion[i].lst_process->program_counter);
-	else if (*data->tab_champion[i].lst_process->program_counter == 0x0c )
-		opcode_fork(data, *data->tab_champion[i].lst_process->program_counter);
-	else if (*data->tab_champion[i].lst_process->program_counter == 0x02 )
-		opcode_ld(data, *data->tab_champion[i].lst_process->program_counter);
-	else if (*data->tab_champion[i].lst_process->program_counter == 0x0a )
-		opcode_ldi(data, *data->tab_champion[i].lst_process->program_counter);
-	else if (*data->tab_champion[i].lst_process->program_counter == 0x0d )
-		opcode_lld(data, *data->tab_champion[i].lst_process->program_counter);
-	else if (*data->tab_champion[i].lst_process->program_counter == 0x0e )
-		opcode_lldi(data, *data->tab_champion[i].lst_process->program_counter);
+	if (data->vm[p_process->pc] == 0x04 )
+		opcode_add(data, p_process);
+	else if (data->vm[p_process->pc] == 0x10 )
+		opcode_aff(data, p_process);
+	else if (data->vm[p_process->pc] == 0x06 )
+		opcode_and(data, p_process);
+	else if (data->vm[p_process->pc] == 0x0c )
+		opcode_fork(data, p_process);
+	else if (data->vm[p_process->pc] == 0x02 )
+		opcode_ld(data, p_process);
+	else if (data->vm[p_process->pc] == 0x0a )
+		opcode_ldi(data, p_process);
+	else if (data->vm[p_process->pc] == 0x0d )
+		opcode_lld(data, p_process);
+	else if (data->vm[p_process->pc] == 0x0e )
+		opcode_lldi(data, p_process);
 	return (EXIT_SUCCESS);
 }
 
-int				tab_opcod_2(t_var *data, unsigned long i)
+int				tab_opcode_2(t_var *data, t_process *p_process)
 {
-	if (*data->tab_champion[i].lst_process->program_counter == 0x0f )
-		opcode_lfork(data, *data->tab_champion[i].lst_process->program_counter);
-	else if (*data->tab_champion[i].lst_process->program_counter == 0x01 )
-		opcode_live(data, *data->tab_champion[i].lst_process->program_counter);
-	else if (*data->tab_champion[i].lst_process->program_counter == 0x07 )
-		opcode_or(data, *data->tab_champion[i].lst_process->program_counter);
-	else if (*data->tab_champion[i].lst_process->program_counter == 0x0a )
-		opcode_st(data, *data->tab_champion[i].lst_process->program_counter);
-	else if (*data->tab_champion[i].lst_process->program_counter == 0x03 )
-		opcode_sti(data, *data->tab_champion[i].lst_process->program_counter);
-	else if (*data->tab_champion[i].lst_process->program_counter == 0x0b )
-		opcode_sub(data, *data->tab_champion[i].lst_process->program_counter);
-	else if (*data->tab_champion[i].lst_process->program_counter == 0x05 )
-		opcode_xor(data, *data->tab_champion[i].lst_process->program_counter);
-	else if (*data->tab_champion[i].lst_process->program_counter == 0x08 )
-		opcode_zjmp(data, *data->tab_champion[i].lst_process->program_counter);
+	if (data->vm[p_process->pc] == 0x0f )
+		opcode_lfork(data, p_process);
+	else if (data->vm[p_process->pc] == 0x01 )
+		opcode_live(data, p_process);
+	else if (data->vm[p_process->pc] == 0x07 )
+		opcode_or(data, p_process);
+	else if (data->vm[p_process->pc] == 0x0a )
+		opcode_st(data, p_process);
+	else if (data->vm[p_process->pc] == 0x03 )
+		opcode_sti(data, p_process);
+	else if (data->vm[p_process->pc] == 0x0b )
+		opcode_sub(data, p_process);
+	else if (data->vm[p_process->pc] == 0x05 )
+		opcode_xor(data, p_process);
+	else if (data->vm[p_process->pc] == 0x08 )
+		opcode_zjmp(data, p_process);
 	return (EXIT_SUCCESS);
 }
-*/
+

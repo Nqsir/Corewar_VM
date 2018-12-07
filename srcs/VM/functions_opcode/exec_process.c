@@ -13,13 +13,14 @@
 
 #include "../includes/corewar.h"
 
-static void		ft_nbr_live_op_code(t_process *p_process)
+static void		ft_nbr_live_op_code(t_var *data, t_process *p_process)
 {
 	{
 		ft_printf("        P(%i)\n", p_process->nbr_live);
 		p_process->flag = 0;
-		p_process->nbr_live++;
-		//EXEC OP_CODE
+		ft_bzero(data->t_params, sizeof(data->t_params));
+		tab_opcode_1(data, p_process);
+		tab_opcode_2(data, p_process);
 	}
 }
 
@@ -43,7 +44,7 @@ int				exec_program(t_var *data)
 			if (!p_process->flag)
 				ft_no_flag_p_process(&p_process, data);
 			else if (p_process->end_op == data->cycle)
-				ft_nbr_live_op_code(p_process);
+				ft_nbr_live_op_code(data, p_process);
 			p_process = p_process->next;
 		}
 		i++;

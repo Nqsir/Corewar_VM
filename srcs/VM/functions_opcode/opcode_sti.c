@@ -1,0 +1,55 @@
+/* ************************************************************************** */
+/*                                                          LE - /            */
+/*                                                              /             */
+/*   opcode_sti.c                                     .::    .:/ .      .::   */
+/*                                                 +:+:+   +:    +:  +:+:+    */
+/*   By: fpupier <fpupier@student.le-101.fr>        +:+   +:    +:    +:+     */
+/*                                                 #+#   #+    #+    #+#      */
+/*   Created: 2018/12/07 10:06:14 by fpupier      #+#   ##    ##    #+#       */
+/*   Updated: 2018/12/07 10:06:14 by fpupier     ###    #+. /#+    ###.fr     */
+/*                                                         /                  */
+/*                                                        /                   */
+/* ************************************************************************** */
+
+#include "../includes/corewar.h"
+
+static int		check_sti(t_var *data, unsigned int pc)
+{
+	unsigned char	p_1;
+	unsigned char	p_2;
+	unsigned char	p_3;
+	unsigned char	p_4;
+	unsigned char	test;
+
+	test = '\0';
+	p_1 = data->vm[pc + 1] >> 6;
+	p_2 = (unsigned char)(0x3 & (data->vm[pc + 1] >> 4));
+	p_3 = (unsigned char)(0x3 & (data->vm[pc + 1] >> 2));
+	p_4 = (unsigned char)(0x3 & data->vm[pc + 1]);
+	if (p_3 == REG_CODE)
+		test = p_3;
+	else if (p_3 == DIR_CODE)
+		test = p_3;
+	if (!(p_1 & REG_CODE) || !(p_2 & 0x3) || !(test) || p_4)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
+int				opcode_sti(t_var *data, t_process *p_process)
+{
+	if (!check_sti(data, p_process->pc) && !ft_params_opcode(data, p_process, 2, 1))
+	{
+		//----------------------------------------------------------------------
+		//
+		//----------------------------------------------------------------------
+
+		if (p_process->registre[data->t_params[1][2]].val == 0)
+			p_process->carry = 1;
+		else
+			p_process->carry = 0;
+		p_process->pc =  ((p_process->pc + data->op_size) % MEM_SIZE);
+		return (EXIT_SUCCESS);
+	}
+	p_process->pc =  ((p_process->pc + 1) % MEM_SIZE);
+	return (EXIT_FAILURE);
+}

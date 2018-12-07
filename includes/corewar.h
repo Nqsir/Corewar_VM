@@ -33,7 +33,7 @@ typedef struct			s_free
 
 typedef struct			s_process
 {
-	unsigned char		*program_counter;
+	unsigned int		pc;
 	unsigned long		nbr_live;
 	unsigned long		end_op;
 	t_reg				registre[REG_NUMBER];
@@ -63,9 +63,20 @@ typedef struct			s_op
 	int					val_5;
 }						t_op;
 
+typedef struct			s_op_data
+{
+	size_t				octet_param;
+	size_t              type_1;
+	size_t				param_1;
+	size_t              type_2;
+	size_t				param_2;
+	size_t              type_3;
+	size_t				param_3;
+}						t_op_data;
+
 typedef struct			s_var
 {
-	unsigned char		*virtual_machine;
+	unsigned char		*vm;
 	t_champion			tab_champion[MAX_PLAYERS];
 	unsigned long		cycle;
 	unsigned long		check_cycle;
@@ -79,7 +90,10 @@ typedef struct			s_var
 	unsigned int		pos_player;
 	t_op				op_tab[17];
 	t_free				*lst_free;
-	int					t_params[2][3];
+	unsigned int		t_params[2][3];
+	unsigned int 		p_p;
+	unsigned int		op_size;
+
 }						t_var;
 
 int						create_vm(t_var *data, unsigned char **virtual_machine,
@@ -90,7 +104,8 @@ int						cycle_management(t_var *data, unsigned long nb_dump);
 int						cycle_to_die(t_var *data);
 int						stop_corewar(t_var *data);
 int						exec_program(t_var *data);
-int						print_vm(t_var *data);
+
+int		    		    print_dump(t_var *data);
 void					ft_count_nbr_champs(int ac, char **av, t_var *data);
 void					ft_check_arg(int ac, char **av, t_var *data);
 void					ft_control_player(t_var *data, long player_nbr);
@@ -101,22 +116,31 @@ void					my_free(t_free **lst_free, size_t address);
 void					my_auto_free(t_free **lst_free);
 int						my_exit(t_free **lst_free, char *file, char *func,
 							int line);
+
+int						tab_opcode_1(t_var *data, t_process *p_process);
+int						tab_opcode_2(t_var *data, t_process *p_process);
+
+int						opcode_add(t_var *data, t_process *p_process);
+int						opcode_aff(t_var *data, t_process *p_process);
+int						opcode_and(t_var *data, t_process *p_process);
+int						opcode_fork(t_var *data, t_process *p_process);
+int						opcode_ld(t_var *data, t_process *p_process);
+int						opcode_ldi(t_var *data, t_process *p_process);
+int						opcode_lld(t_var *data, t_process *p_process);
+int						opcode_lldi(t_var *data, t_process *p_process);
+int						opcode_lfork(t_var *data, t_process *p_process);
+int						opcode_live(t_var *data, t_process *p_process);
+int						opcode_or(t_var *data, t_process *p_process);
+int						opcode_st(t_var *data, t_process *p_process);
+int						opcode_sti(t_var *data, t_process *p_process);
+int						opcode_sub(t_var *data, t_process *p_process);
+int						opcode_xor(t_var *data, t_process *p_process);
+int						opcode_zjmp(t_var *data, t_process *p_process);
+
+
 int						t_process_create(t_var *data, t_process **new_process);
-int						check_add(t_var *data, unsigned char *pc);
-int						check_aff(t_var *data, unsigned char *pc);
-int						check_and(t_var *data, unsigned char *pc);
-int						check_fork(t_var *data, unsigned char *pc);
-int						check_ld(t_var *data, unsigned char *pc);
-int						check_ldi(t_var *data, unsigned char *pc);
-int						check_lld(t_var *data, unsigned char *pc);
-int						check_lldi(t_var *data, unsigned char *pc);
-int						check_lfork(t_var *data, unsigned char *pc);
-int						check_live(t_var *data, unsigned char *pc);
-int						check_or(t_var *data, unsigned char *pc);
-int						check_st(t_var *data, unsigned char *pc);
-int						check_sti(t_var *data, unsigned char *pc);
-int						check_sub(t_var *data, unsigned char *pc);
-int						check_xor(t_var *data, unsigned char *pc);
-int						check_zjmp(t_var *data, unsigned char *pc);
+
+int         			ft_params_opcode(t_var *data, t_process *pc, int dir_oct, int idx);
+
 
 #endif

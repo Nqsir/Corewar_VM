@@ -13,20 +13,26 @@
 
 #include "../includes/corewar.h"
 
-int				print_vm(t_var *data)
+int				print_dump(t_var *data)
 {
 	int				i;
+	int             j;
 	unsigned char	*tmp;
 
 	i = 0;
-	tmp = data->virtual_machine;
+	tmp = data->vm;
 	while (i < MEM_SIZE)
 	{
-		if (i % 64 == 0)
-			ft_printf("\n");
-		ft_printf("%0.2x ", *tmp);
-		i++;
-		tmp++;
+	    j = 0;
+	    ft_printf("0x%0.4x : ", i);
+	    while (j < 32)
+        {
+            ft_printf("%0.2x ", *tmp);
+            tmp++;
+            i++;
+            j++;
+        }
+        ft_printf("\n");
 	}
 	ft_printf("\n===============================================\n");
 	ft_printf("CYCLE            : %u\n", data->cycle);

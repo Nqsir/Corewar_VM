@@ -13,19 +13,20 @@
 
 #include "corewar.h"
 
-void 			ft_params_opcode(t_var *data, unsigned char *pc, int dir_oct,
+int 			ft_params_opcode(t_var *data, t_process *pc, int dir_oct,
 					int idx)
 {
-	if (pc[1] << 6)
+	//if (pc[1] << 6)
 
 	//if (idx)
 	//	%IDX_MOD;
 	//%MEM_SIZE;
+	return (EXIT_SUCCESS);
 }
 
 static void		ft_init_data_corewar(t_var *data)
 {
-	data->virtual_machine = NULL;
+	data->vm = NULL;
 	data->cycle = 0;
 	data->check_cycle = 0;
 	data->check_cycle_delta = 0;
@@ -61,7 +62,7 @@ int				main(int ac, char **av)
 	ft_init_data_corewar(&data);
 //	ft_params_opcode(t_var *data, unsigned char *pc, int dir_oct, int idx)
 	ft_count_nbr_champs(ac, av, &data);
-	create_vm(&data, &data.virtual_machine, MEM_SIZE);
+	create_vm(&data, &data.vm, MEM_SIZE);
 	ft_check_arg(ac, av, &data);
 	cycle_management(&data, data.dump_value);
 	my_auto_free(&data.lst_free);
