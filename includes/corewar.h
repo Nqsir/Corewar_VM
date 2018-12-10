@@ -18,6 +18,7 @@
 # include "op.h"
 # include <fcntl.h>
 # define DOT_COR 778268530
+# define OCT 8
 # define SIZE_INT 4
 
 typedef struct			s_reg

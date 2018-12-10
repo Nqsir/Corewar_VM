@@ -41,6 +41,7 @@ int				opcode_lldi(t_var *data, t_process *p_process)
 	unsigned char	tmp_val[4];
 	int 			i;
 
+	ft_printf("\n---%s || 0x%x---\n", __func__, data->vm[(p_process->pc + data->op_size) % MEM_SIZE]);
 	if (!check_lldi(data, p_process->pc) && !ft_params_opcode(data, p_process, 2, 1))
 	{
 		tmp_adr = ((data->t_params[0][0] + data->t_params[0][1]) % MEM_SIZE);

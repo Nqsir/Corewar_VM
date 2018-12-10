@@ -42,15 +42,15 @@ int				tab_opcode_2(t_var *data, t_process *p_process)
 		opcode_live(data, p_process);
 	else if (data->vm[p_process->pc] == 0x07 )
 		opcode_or(data, p_process);
-	else if (data->vm[p_process->pc] == 0x0a )
-		opcode_st(data, p_process);
 	else if (data->vm[p_process->pc] == 0x03 )
-		opcode_sti(data, p_process);
+		opcode_st(data, p_process);
 	else if (data->vm[p_process->pc] == 0x0b )
-		opcode_sub(data, p_process);
+		opcode_sti(data, p_process);
 	else if (data->vm[p_process->pc] == 0x05 )
-		opcode_xor(data, p_process);
+		opcode_sub(data, p_process);
 	else if (data->vm[p_process->pc] == 0x08 )
+		opcode_xor(data, p_process);
+	else if (data->vm[p_process->pc] == 0x09 )
 		opcode_zjmp(data, p_process);
 	return (EXIT_SUCCESS);
 }

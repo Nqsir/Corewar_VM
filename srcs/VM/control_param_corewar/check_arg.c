@@ -81,7 +81,7 @@ void			ft_check_arg(int ac, char **av, t_var *data)
 			ft_check_visu(data, &v);
 		else if ((len = ft_strlen(av[n])) > 4)
 			ft_check_champ(data, av, len, n);
-		else if (!ft_strcmp(av[n], "-n"))
+		else if (!ft_strcmp(av[n], "-n") && av[n + 2])
 			ft_strisdigit_pos_neg(av[++n]) ? ft_check_champ(data, av, len, ++n)
 			: exit(my_exit(&data->lst_free,
 				__FILE__, (char *)__func__, __LINE__));

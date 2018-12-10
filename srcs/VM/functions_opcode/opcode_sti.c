@@ -37,6 +37,7 @@ static int		check_sti(t_var *data, unsigned int pc)
 
 int				opcode_sti(t_var *data, t_process *p_process)
 {
+	ft_printf("\n---%s || 0x%x---\n", __func__, data->vm[(p_process->pc + data->op_size) % MEM_SIZE]);
 	if (!check_sti(data, p_process->pc) && !ft_params_opcode(data, p_process, 2, 1))
 	{
 		//----------------------------------------------------------------------

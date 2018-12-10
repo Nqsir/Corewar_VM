@@ -3,8 +3,8 @@
 
 #l2:		sti r1, %:live, %1
 
-bite:	lldi %1500
-		sti r1, %:live, %1
+bite:	sti r1, %:live, %1
+		ld %0, r1
 
 live:	live %1
 		zjmp %:live
