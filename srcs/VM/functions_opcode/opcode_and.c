@@ -31,7 +31,7 @@ static int		check_and(t_var *data, unsigned int pc)
 
 int				opcode_and(t_var *data, t_process *p_process)
 {
-	ft_printf("\n---%s || 0x%x---\n", __func__, data->vm[(p_process->pc + data->op_size) % MEM_SIZE]);
+	//ft_printf("\n---%s || 0x%x---\n", __func__, data->vm[(p_process->pc + data->op_size) % MEM_SIZE]);
 	if (!check_and(data, p_process->pc) && !ft_params_opcode(data, p_process, 4, 1))
 	{
 		p_process->registre[data->t_params[1][2]].val =	(data->t_params[0][0] & data->t_params[0][1]);
@@ -39,7 +39,8 @@ int				opcode_and(t_var *data, t_process *p_process)
 			p_process->carry = 1;
 		else
 			p_process->carry = 0;
-		p_process->pc =  ((p_process->pc + data->op_size) % MEM_SIZE);
+
+		p_process->pc = ((p_process->pc + data->op_size) % MEM_SIZE);
 		return (EXIT_SUCCESS);
 	}
 	p_process->pc =  ((p_process->pc + data->op_size) % MEM_SIZE);

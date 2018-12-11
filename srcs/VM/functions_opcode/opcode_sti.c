@@ -37,20 +37,27 @@ static int		check_sti(t_var *data, unsigned int pc)
 
 int				opcode_sti(t_var *data, t_process *p_process)
 {
-	ft_printf("\n---%s || 0x%x---\n", __func__, data->vm[(p_process->pc + data->op_size) % MEM_SIZE]);
+	unsigned int	tmp_adr;
+	unsigned char	tmp_val[4];
+	int 			i;
+
+	//ft_printf("\n---%s || 0x%x---\n", __func__, data->vm[(p_process->pc + data->op_size) % MEM_SIZE]);
 	if (!check_sti(data, p_process->pc) && !ft_params_opcode(data, p_process, 2, 1))
 	{
-		//----------------------------------------------------------------------
-		//
-		//----------------------------------------------------------------------
-
-		if (p_process->registre[data->t_params[1][2]].val == 0)
-			p_process->carry = 1;
-		else
-			p_process->carry = 0;
+		tmp_adr = ((p_process->pc + data->t_params[0][1] + data->t_params[0][2]) % MEM_SIZE);
+		tmp_val[0] = ~((data->t_params[0][0]) << 24);
+		tmp_val[1] = ~((data->t_params[0][0]) << 16);
+		tmp_val[2] = ~((data->t_params[0][0]) << 8);
+		tmp_val[3] = ~(data->t_params[0][0]);
+		i = 0;
+		while (i < REG_SIZE)
+		{
+			data->vm[(tmp_adr + i) % MEM_SIZE] = tmp_val[i];
+			i++;
+		}
 		p_process->pc =  ((p_process->pc + data->op_size) % MEM_SIZE);
 		return (EXIT_SUCCESS);
 	}
-	p_process->pc =  ((p_process->pc + 1) % MEM_SIZE);
+	p_process->pc =  ((p_process->pc + data->op_size) % MEM_SIZE);
 	return (EXIT_FAILURE);
 }

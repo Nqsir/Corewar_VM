@@ -25,7 +25,7 @@ int				print_dump(t_var *data)
 	{
 	    j = 0;
 	    ft_printf("0x%0.4x : ", i);
-	    while (j < 32)
+	    while (j < 64)
         {
             ft_printf("%0.2x ", *tmp);
             tmp++;

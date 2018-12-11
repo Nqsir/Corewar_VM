@@ -13,6 +13,8 @@
 
 #include "../includes/corewar.h"
 
+
+
 static int		init_cycle_management(t_var *data)
 {
 	data->check_cycle = CYCLE_TO_DIE;

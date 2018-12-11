@@ -36,16 +36,15 @@ void		print_t_params(t_var *data)
 
 int			ft_indirect(t_var *data, t_process *proc, int dir_oct, int idx)
 {
-	int 			i;
 	unsigned int 	val;
 
-	i = 2;
 	val = (data->vm[(proc->pc + data->op_size++) % MEM_SIZE] << 8)
 		  + (data->vm[(proc->pc + data->op_size++) % MEM_SIZE]);
 	if (idx)
 		val = val % IDX_MOD;
 	data->t_params[0][data->p_p] = data->vm[(proc->pc + val) % MEM_SIZE];
 	data->p_p += 1;
+//	ft_printf("data->op_size = %d\n", data->op_size);
 	return (EXIT_SUCCESS);
 }
 
@@ -145,10 +144,30 @@ int 		ft_params_opcode(t_var *data, t_process *proc, int dir_oct,
 		}
 	}
 	/*DEBUG-START*/
-	print_t_params(data);
+	//print_t_params(data);
 	/*DEBUG-END*/
-	ft_printf("data->op_size = %d\n", data->op_size);
+	//ft_printf("data->op_size = %d\n", data->op_size);
 	return (EXIT_SUCCESS);
+}
+
+static void		ft_init_data_corewar_2(t_var *data)
+{
+	data->op_tab[1] = 10;
+	data->op_tab[2] = 5;
+	data->op_tab[3] = 5;
+	data->op_tab[4] = 10;
+	data->op_tab[5] = 10;
+	data->op_tab[6] = 6;
+	data->op_tab[7] = 6;
+	data->op_tab[8] = 6;
+	data->op_tab[9] = 20;
+	data->op_tab[10] = 25;
+	data->op_tab[11] = 25;
+	data->op_tab[12] = 800;
+	data->op_tab[13] = 10;
+	data->op_tab[14] = 50;
+	data->op_tab[15] = 1000;
+	data->op_tab[16] = 2;
 }
 
 static void		ft_init_data_corewar(t_var *data)
@@ -165,6 +184,7 @@ static void		ft_init_data_corewar(t_var *data)
 	data->pos_player = 0;
 	data->lst_free = NULL;
 	data->p_p = 0;
+	ft_init_data_corewar_2(data);
 }
 
 static void		ft_print_usage(void)

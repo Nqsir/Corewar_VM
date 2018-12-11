@@ -13,7 +13,28 @@
 
 #include "../includes/corewar.h"
 
-int				tab_opcode_1(t_var *data, t_process *p_process)
+static int		tab_opcode_2(t_var *data, t_process *p_process)
+{
+	if (data->vm[p_process->pc] == 0x0f)
+		opcode_lfork(data, p_process);
+	else if (data->vm[p_process->pc] == 0x01)
+		opcode_live(data, p_process);
+	else if (data->vm[p_process->pc] == 0x07)
+		opcode_or(data, p_process);
+	else if (data->vm[p_process->pc] == 0x03)
+		opcode_st(data, p_process);
+	else if (data->vm[p_process->pc] == 0x0b)
+		opcode_sti(data, p_process);
+	else if (data->vm[p_process->pc] == 0x05)
+		opcode_sub(data, p_process);
+	else if (data->vm[p_process->pc] == 0x08)
+		opcode_xor(data, p_process);
+	else if (data->vm[p_process->pc] == 0x09)
+		opcode_zjmp(data, p_process);
+	return (EXIT_SUCCESS);
+}
+
+int				tab_opcode(t_var *data, t_process *p_process)
 {
 	if (data->vm[p_process->pc] == 0x04)
 		opcode_add(data, p_process);
@@ -36,24 +57,5 @@ int				tab_opcode_1(t_var *data, t_process *p_process)
 	return (EXIT_SUCCESS);
 }
 
-int				tab_opcode_2(t_var *data, t_process *p_process)
-{
-	if (data->vm[p_process->pc] == 0x0f)
-		opcode_lfork(data, p_process);
-	else if (data->vm[p_process->pc] == 0x01)
-		opcode_live(data, p_process);
-	else if (data->vm[p_process->pc] == 0x07)
-		opcode_or(data, p_process);
-	else if (data->vm[p_process->pc] == 0x03)
-		opcode_st(data, p_process);
-	else if (data->vm[p_process->pc] == 0x0b)
-		opcode_sti(data, p_process);
-	else if (data->vm[p_process->pc] == 0x05)
-		opcode_sub(data, p_process);
-	else if (data->vm[p_process->pc] == 0x08)
-		opcode_xor(data, p_process);
-	else if (data->vm[p_process->pc] == 0x09)
-		opcode_zjmp(data, p_process);
-	return (EXIT_SUCCESS);
-}
+
 

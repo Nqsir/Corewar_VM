@@ -37,7 +37,7 @@ typedef struct			s_process
 	unsigned int		pc;
 	unsigned long		nbr_live;
 	unsigned long		end_op;
-	t_reg				registre[REG_NUMBER];
+	t_reg				registre[REG_NUMBER + 1];
 	int					carry;
 	struct s_process	*next;
 	struct s_process	*prev;
@@ -51,7 +51,7 @@ typedef struct			s_champion
 	t_process			*lst_process;
 	t_header			header;
 }						t_champion;
-
+/*
 typedef struct			s_op
 {
 	char				*name;
@@ -59,22 +59,12 @@ typedef struct			s_op
 	int					param[3];
 	int					val_2;
 	unsigned long		cycle;
+
 	char				*comment;
 	int					val_4;
 	int					val_5;
 }						t_op;
-
-typedef struct			s_op_data
-{
-	size_t				octet_param;
-	size_t              type_1;
-	size_t				param_1;
-	size_t              type_2;
-	size_t				param_2;
-	size_t              type_3;
-	size_t				param_3;
-}						t_op_data;
-
+*/
 typedef struct			s_var
 {
 	unsigned char		*vm;
@@ -89,7 +79,8 @@ typedef struct			s_var
 	unsigned long		dump_value;
 	size_t				padding;
 	unsigned int		pos_player;
-	t_op				op_tab[17];
+	unsigned int		op_tab[17];
+	unsigned int		last_live;
 	t_free				*lst_free;
 	unsigned int		t_params[2][3];
 	unsigned int 		p_p;
@@ -118,8 +109,7 @@ void					my_auto_free(t_free **lst_free);
 int						my_exit(t_free **lst_free, char *file, char *func,
 							int line);
 
-int						tab_opcode_1(t_var *data, t_process *p_process);
-int						tab_opcode_2(t_var *data, t_process *p_process);
+int						tab_opcode(t_var *data, t_process *p_process);
 
 int						opcode_add(t_var *data, t_process *p_process);
 int						opcode_aff(t_var *data, t_process *p_process);
