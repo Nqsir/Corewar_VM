@@ -17,13 +17,11 @@ static void		ft_nbr_live_op_code(t_var *data, t_process *p_process)
 {
 	{
 		//ft_printf("        P(%i)\n", p_process->nbr_live);
-		p_process->flag = 0;
 		//p_process->nbr_live++;
+		p_process->flag = 0;
+		data->op_size = 0;
 		ft_bzero(data->t_params, sizeof(data->t_params));
-		data->op_size = 0;
 		tab_opcode_1(data, p_process);
-		data->op_size = 0;
-		tab_opcode_2(data, p_process);
 	}
 }
 

@@ -25,10 +25,10 @@ int				opcode_zjmp(t_var *data, t_process *p_process)
 		}
 		else
 		{
-			p_process->pc =  ((p_process->pc + 1) % MEM_SIZE);
+			p_process->pc = ((p_process->pc + 1) % MEM_SIZE);
 			return (EXIT_SUCCESS);
 		}
 	}
-	p_process->pc =  ((p_process->pc + 1) % MEM_SIZE);
+	p_process->pc = ((p_process->pc + 1) % MEM_SIZE);
 	return (EXIT_FAILURE);
 }
