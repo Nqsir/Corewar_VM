@@ -62,8 +62,8 @@ int				exec_program(t_var *data)
 	int			i;
 	t_process	*p_process;
 
-	i = data->nb_champion - 1;
-	while (i >= 0)
+	i = 0;
+	while (i < data->nb_champion)
 	{
 		p_process = data->tab_champion[i].lst_process;
 		while (p_process)
@@ -76,7 +76,7 @@ int				exec_program(t_var *data)
 			//ft_printf("flag = %i  || end_op = %i  || cycle = %i\n", p_process->flag, p_process->end_op, data->cycle);
 			p_process = p_process->next;
 		}
-		i--;
+		i++;
 	}
 	return (EXIT_SUCCESS);
 }

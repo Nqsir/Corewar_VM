@@ -42,7 +42,10 @@ int			ft_indirect(t_var *data, t_process *proc, int dir_oct, int idx)
 		  + (data->vm[(proc->pc + data->op_size++) % MEM_SIZE]);
 	if (idx)
 		val = val % IDX_MOD;
-	data->t_params[0][data->p_p] = data->vm[(proc->pc + val) % MEM_SIZE];
+	if (data->vm[proc->pc] == 0x03)
+		data->t_params[0][data->p_p] = val;
+	else
+		data->t_params[0][data->p_p] = data->vm[(proc->pc + val) % MEM_SIZE];
 	data->p_p += 1;
 //	ft_printf("data->op_size = %d\n", data->op_size);
 	return (EXIT_SUCCESS);

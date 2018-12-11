@@ -38,20 +38,23 @@ static int		check_st(t_var *data, unsigned int pc)
 int				opcode_st(t_var *data, t_process *p_process)
 {
 
-	unsigned char	*tmp_val;
+	unsigned char	tmp_val[4];
 	int 			i;
 
-	tmp_val = (unsigned char *)p_process->registre[data->t_params[1][1]].val;
-
-	ft_printf("\n---%s || 0x%x---\n", __func__, data->vm[(p_process->pc + data->op_size) % MEM_SIZE]);
+	//ft_printf("\n---%s || 0x%x---\n", __func__, data->vm[(p_process->pc + data->op_size) % MEM_SIZE]);
 	if (!check_st(data, p_process->pc) && !ft_params_opcode(data, p_process, 0, 1))
 	{
 		if (data->t_params[1][1] == 0)
 		{
+			tmp_val[0] = p_process->registre[data->t_params[1][0]].val << 24;
+			tmp_val[1] = p_process->registre[data->t_params[1][0]].val << 16;
+			tmp_val[2] = p_process->registre[data->t_params[1][0]].val << 8;
+			tmp_val[3] = p_process->registre[data->t_params[1][0]].val;
 			i = 0;
-			while (i < MEM_SIZE)
+			ft_printf("val = %i\n", data->t_params[0][1]);
+			while (i < REG_SIZE)
 			{
-				data->vm[(data->t_params[0][1] + i) % MEM_SIZE] = (unsigned char)(tmp_val + 1);
+				data->vm[((p_process->pc + data->t_params[0][1] + i)) % MEM_SIZE] = tmp_val[i];
 				i++;
 			}
 		}

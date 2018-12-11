@@ -15,12 +15,10 @@
 
 int			create_champion(t_var *data, unsigned int nbr, unsigned char *cor)
 {
-	if (!(data->tab_champion[data->pos_player].lst_process =
+	if (!(data->tab_champion[data->pos_player ].lst_process =
 			my_memalloc(&data->lst_free, sizeof(t_process))))
-	{
-		ft_printf("Erreur create_champion\n");
-		return (EXIT_FAILURE);
-	}
+		exit(my_exit(&data->lst_free, __FILE__, (char *)__func__, __LINE__));
+	ft_printf("pos_player = %i\n", data->pos_player);
 	data->tab_champion[data->pos_player].nb_live = 0;
 	data->tab_champion[data->pos_player].nbr = nbr;
 	data->tab_champion[data->pos_player].lst_process->registre[1].val = nbr;
