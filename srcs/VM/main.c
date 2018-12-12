@@ -24,9 +24,9 @@ void		print_t_params(t_var *data)
 		while (i < 3)
 		{
 			if (n == 0)
-				ft_printf("|  Valeur =\t%x\t|", data->t_params[n][i]);
+				ft_printf("|  Valeur   =\t%15i\t|", data->t_params[n][i]);
 			if (n == 1)
-				ft_printf("|  Registre =\t%x\t|", data->t_params[n][i]);
+				ft_printf("|  Registre =\t%15i\t|", data->t_params[n][i]);
 			i++;
 		}
 		ft_printf("\n");
@@ -40,14 +40,21 @@ int			ft_indirect(t_var *data, t_process *proc, int dir_oct, int idx)
 
 	val = (data->vm[(proc->pc + data->op_size++) % MEM_SIZE] << 8)
 		  + (data->vm[(proc->pc + data->op_size++) % MEM_SIZE]);
+	ft_printf("val = %d\n", val);
 	if (idx)
 		val = val % IDX_MOD;
+	ft_printf("val = %d\n", val);
 	if (data->vm[proc->pc] == 0x03)
 		data->t_params[0][data->p_p] = val;
+	else if (data->vm[proc->pc] == 0x0d)
+		data->t_params[0][data->p_p] = (data->vm[(proc->pc + val) % MEM_SIZE] << 8)
+		+ data->vm[(proc->pc + val + 1) % MEM_SIZE];
 	else
-		data->t_params[0][data->p_p] = data->vm[(proc->pc + val) % MEM_SIZE];
+		data->t_params[0][data->p_p] = (data->vm[(proc->pc + val) % MEM_SIZE] << 24)
+			+ (data->vm[(proc->pc + val + 1) % MEM_SIZE] << 16)
+			+(data->vm[(proc->pc + val + 2) % MEM_SIZE] << 8)
+			+ data->vm[(proc->pc + val + 3) % MEM_SIZE];
 	data->p_p += 1;
-//	ft_printf("data->op_size = %d\n", data->op_size);
 	return (EXIT_SUCCESS);
 }
 
@@ -65,8 +72,8 @@ int			ft_direct(t_var *data, t_process *proc, int dir_oct, int idx)
 			+ (data->vm[(proc->pc + data->op_size++) % MEM_SIZE] << 16)
 			+ (data->vm[(proc->pc + data->op_size++) % MEM_SIZE] << 8)
 			+ (data->vm[(proc->pc + data->op_size++) % MEM_SIZE]);
-	if (idx)
-		val = val % IDX_MOD;
+	//if (idx)
+	//	val = val % IDX_MOD;
 	data->t_params[0][data->p_p] = val;
 	data->p_p += 1;
 	return (EXIT_SUCCESS);
@@ -147,7 +154,7 @@ int 		ft_params_opcode(t_var *data, t_process *proc, int dir_oct,
 		}
 	}
 	/*DEBUG-START*/
-	//print_t_params(data);
+	print_t_params(data);
 	/*DEBUG-END*/
 	//ft_printf("data->op_size = %d\n", data->op_size);
 	return (EXIT_SUCCESS);

@@ -38,20 +38,18 @@ static int		check_ldi(t_var *data, unsigned int pc)
 int				opcode_ldi(t_var *data, t_process *p_process)
 {
 	unsigned int	tmp_adr;
-	unsigned int	tmp_val;
+	//unsigned int	tmp_val;
 
 	ft_printf("\n---%s || 0x%x---\n", __func__, data->vm[(p_process->pc + data->op_size) % MEM_SIZE]);
 	if (!check_ldi(data, p_process->pc) && !ft_params_opcode(data, p_process, 2, 1))
 	{
-		tmp_val = ((data->vm[(p_process->pc + data->t_params[0][0]) % MEM_SIZE] << 24)
-				+  (data->vm[(p_process->pc + data->t_params[0][0]) % MEM_SIZE] << 16)
-				+ (data->vm[(p_process->pc + data->t_params[0][0]) % MEM_SIZE] << 8)
-				+ (data->vm[(p_process->pc + data->t_params[0][0]) % MEM_SIZE]));
-		tmp_adr = (tmp_val + data->t_params[0][1]) % IDX_MOD;
-		p_process->registre[data->t_params[1][2]].val = ((data->vm[(p_process->pc + tmp_adr) % MEM_SIZE] << 24)
-				   +  (data->vm[(p_process->pc + tmp_adr) % MEM_SIZE] << 16)
-				   + (data->vm[(p_process->pc + tmp_adr) % MEM_SIZE] << 8)
-				   + (data->vm[(p_process->pc + tmp_adr) % MEM_SIZE]));
+		//ft_printf("param_0 = %i  || param_1 = %i  || param_2 = %i\n", data->t_params[0][0], data->t_params[0][1], data->t_params[1][2]);
+		tmp_adr = (data->t_params[0][0] + data->t_params[0][1]) % IDX_MOD;
+		p_process->registre[data->t_params[1][2]].val =
+				((data->vm[(p_process->pc + tmp_adr) % MEM_SIZE] << 24)
+				   +  (data->vm[(p_process->pc + tmp_adr + 1) % MEM_SIZE] << 16)
+				   + (data->vm[(p_process->pc + tmp_adr + 2) % MEM_SIZE] << 8)
+				   + (data->vm[(p_process->pc + tmp_adr + 3) % MEM_SIZE]));
 		if (p_process->registre[data->t_params[1][2]].val == 0)
 			p_process->carry = 1;
 		else

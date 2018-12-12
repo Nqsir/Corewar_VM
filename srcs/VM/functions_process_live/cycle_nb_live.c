@@ -100,8 +100,6 @@ int				cycle_to_die(t_var *data)
 			if (!p_process->nbr_live)
 				t_process_del(data, &data->tab_champion[i].lst_process,
 					&p_process);
-			else
-				data->tab_champion[i].nb_live += p_process->nbr_live;
 			p_process = p_process->next;
 		}
 		data->nb_live += data->tab_champion[i].nb_live;

@@ -41,14 +41,19 @@ int				opcode_sti(t_var *data, t_process *p_process)
 	unsigned char	tmp_val[4];
 	int 			i;
 
-	//ft_printf("\n---%s || 0x%x---\n", __func__, data->vm[(p_process->pc + data->op_size) % MEM_SIZE]);
-	if (!check_sti(data, p_process->pc) && !ft_params_opcode(data, p_process, 2, 1))
+	ft_printf("\n---%s || 0x%x---\n", __func__, data->vm[(p_process->pc + data->op_size) % MEM_SIZE]);
+	if (!check_sti(data, p_process->pc) && !ft_params_opcode(data, p_process, 2, 0))
 	{
+		ft_printf("index = %i  || pc = 0x%0.2x  ||  param_1 = %.8x  ||  param_2 = %i  ||  param_3 = %i\n", p_process->pc, data->vm[p_process->pc], data->t_params[0][0], data->t_params[0][1], data->t_params[0][2]);
 		tmp_adr = ((p_process->pc + data->t_params[0][1] + data->t_params[0][2]) % MEM_SIZE);
-		tmp_val[0] = ~((data->t_params[0][0]) << 24);
-		tmp_val[1] = ~((data->t_params[0][0]) << 16);
-		tmp_val[2] = ~((data->t_params[0][0]) << 8);
-		tmp_val[3] = ~(data->t_params[0][0]);
+		tmp_val[0] = (unsigned char)((data->t_params[0][0]) >> 24);
+		tmp_val[1] = (unsigned char)((data->t_params[0][0]) >> 16);
+		tmp_val[2] = (unsigned char)((data->t_params[0][0]) >> 8);
+		tmp_val[3] = (unsigned char)(data->t_params[0][0]);
+		//ft_printf("tmp_val[0] = %x\n", tmp_val[0]);
+		//ft_printf("tmp_val[1] = %x\n", tmp_val[1]);
+		//ft_printf("tmp_val[2] = %x\n", tmp_val[2]);
+		//ft_printf("tmp_val[3] = %x\n", tmp_val[3]);
 		i = 0;
 		while (i < REG_SIZE)
 		{

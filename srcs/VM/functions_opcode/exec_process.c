@@ -42,7 +42,7 @@ static int		ft_is_op_code(t_var *data, t_process *p_process)
 static void		ft_nbr_live_op_code(t_var *data, t_process *p_process, int i)
 {
 	{
-		ft_printf("        Player(%i) EXECUTE  ==>  PC = 0x%0.2x  ||  index = %i  ||  flag = %i  || end_op = %i  || cycle = %i\n", i, data->vm[p_process->pc], p_process->pc, p_process->flag, p_process->end_op, data->cycle);
+		//ft_printf("        Player(%i) EXECUTE  ==>  PC = 0x%0.2x  ||  index = %i  ||  flag = %i  || end_op = %i  || cycle = %i\n", i, data->vm[p_process->pc], p_process->pc, p_process->flag, p_process->end_op, data->cycle);
 		p_process->flag = 0;
 		data->op_size = 0;
 		ft_bzero(data->t_params, sizeof(data->t_params));
@@ -52,7 +52,7 @@ static void		ft_nbr_live_op_code(t_var *data, t_process *p_process, int i)
 
 static void		ft_no_flag_p_process(t_var *data, t_process *p_process, int i)
 {
-	ft_printf("        Player(%i) IN       ==>  PC = 0x%0.2x  ||  index = %i  ||  flag = %i  || end_op = %i  || cycle = %i\n",i, data->vm[p_process->pc], p_process->pc, p_process->flag, p_process->end_op, data->cycle);
+	//ft_printf("        Player(%i) IN       ==>  PC = 0x%0.2x  ||  index = %i  ||  flag = %i  || end_op = %i  || cycle = %i\n",i, data->vm[p_process->pc], p_process->pc, p_process->flag, p_process->end_op, data->cycle);
 	p_process->flag = 1;
 	p_process->end_op = data->cycle + (data->op_tab[data->vm[p_process->pc]]) - 1;
 }

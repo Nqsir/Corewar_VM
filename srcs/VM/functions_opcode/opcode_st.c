@@ -41,7 +41,7 @@ int				opcode_st(t_var *data, t_process *p_process)
 	unsigned char	tmp_val[4];
 	int 			i;
 
-	//ft_printf("\n---%s || 0x%x---\n", __func__, data->vm[(p_process->pc + data->op_size) % MEM_SIZE]);
+	ft_printf("\n---%s || 0x%x---\n", __func__, data->vm[(p_process->pc + data->op_size) % MEM_SIZE]);
 	if (!check_st(data, p_process->pc) && !ft_params_opcode(data, p_process, 0, 1))
 	{
 		if (data->t_params[1][1] == 0)
@@ -51,7 +51,6 @@ int				opcode_st(t_var *data, t_process *p_process)
 			tmp_val[2] = p_process->registre[data->t_params[1][0]].val << 8;
 			tmp_val[3] = p_process->registre[data->t_params[1][0]].val;
 			i = 0;
-			ft_printf("val = %i\n", data->t_params[0][1]);
 			while (i < REG_SIZE)
 			{
 				data->vm[((p_process->pc + data->t_params[0][1] + i)) % MEM_SIZE] = tmp_val[i];
@@ -62,7 +61,7 @@ int				opcode_st(t_var *data, t_process *p_process)
 		{
 			p_process->registre[data->t_params[1][1]].val = p_process->registre[data->t_params[1][0]].val;
 		}
-
+		ft_printf("val = %i\n", p_process->registre[data->t_params[1][1]].val);
 		if (p_process->registre[data->t_params[1][2]].val == 0)
 			p_process->carry = 1;
 		else

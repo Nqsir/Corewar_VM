@@ -21,7 +21,8 @@ int			create_champion(t_var *data, unsigned int nbr, unsigned char *cor)
 	ft_printf("pos_player = %i\n", data->pos_player);
 	data->tab_champion[data->pos_player].nb_live = 0;
 	data->tab_champion[data->pos_player].nbr = nbr;
-	data->tab_champion[data->pos_player].lst_process->registre[1].val = nbr;
+	data->tab_champion[data->pos_player].lst_process->registre[1].val = ~(nbr);
+	ft_printf("registre[1].val = %.8x\n", data->tab_champion[data->pos_player].lst_process->registre[1].val);
 	data->tab_champion[data->pos_player].lst_process->pc = ((MEM_SIZE/ data->nb_champion) * data->pos_player);
 	ft_memcpy(&data->vm[data->tab_champion[data->pos_player].lst_process->pc],
 			cor, data->tab_champion[data->pos_player].header.prog_size);
