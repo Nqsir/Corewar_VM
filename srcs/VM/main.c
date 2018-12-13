@@ -11,6 +11,7 @@
 /*                                                        /                   */
 /* ************************************************************************** */
 
+#include "corewar.h"
 
 static void		ft_init_data_corewar_2(t_var *data)
 {
