@@ -13,10 +13,10 @@
 
 #include "../includes/corewar.h"
 
-static int		tab_opcode_2(t_var *data, t_process *p_process)
+static int		tab_opcode_2(t_var *data, t_process *p_process, int i)
 {
 	if (data->vm[p_process->pc] == 0x0f)
-		opcode_lfork(data, p_process);
+		opcode_lfork(data, p_process, i);
 	else if (data->vm[p_process->pc] == 0x01)
 		opcode_live(data, p_process);
 	else if (data->vm[p_process->pc] == 0x07)
@@ -34,7 +34,7 @@ static int		tab_opcode_2(t_var *data, t_process *p_process)
 	return (EXIT_SUCCESS);
 }
 
-int				tab_opcode(t_var *data, t_process *p_process)
+int				tab_opcode(t_var *data, t_process *p_process, int i)
 {
 	if (data->vm[p_process->pc] == 0x04)
 		opcode_add(data, p_process);
@@ -43,7 +43,7 @@ int				tab_opcode(t_var *data, t_process *p_process)
 	else if (data->vm[p_process->pc] == 0x06)
 		opcode_and(data, p_process);
 	else if (data->vm[p_process->pc] == 0x0c)
-		opcode_fork(data, p_process);
+		opcode_fork(data, p_process, i);
 	else if (data->vm[p_process->pc] == 0x02)
 		opcode_ld(data, p_process);
 	else if (data->vm[p_process->pc] == 0x0a)
@@ -53,7 +53,7 @@ int				tab_opcode(t_var *data, t_process *p_process)
 	else if (data->vm[p_process->pc] == 0x0e)
 		opcode_lldi(data, p_process);
 	else
-		tab_opcode_2(data, p_process);
+		tab_opcode_2(data, p_process, i);
 	return (EXIT_SUCCESS);
 }
 

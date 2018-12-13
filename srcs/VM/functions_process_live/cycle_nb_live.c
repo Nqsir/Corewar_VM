@@ -13,37 +13,47 @@
 
 #include "../includes/corewar.h"
 
-int				t_process_create(t_var *data, t_process **new_process)
+int				t_process_create(t_var *data, t_process *p_process, int i)
 {
-	if (!(*new_process = my_memalloc(&data->lst_free, sizeof(t_process))))
-	{
-		ft_printf("Erreur t_process_create\n");
-		return (EXIT_FAILURE);
-	}
+	t_process	*sav_start;
+	t_process	*new_process;
+
+	sav_start = data->tab_champion[i].lst_process;
+	if (!(new_process = my_memalloc(&data->lst_free, sizeof(t_process))))
+		exit(my_exit(&data->lst_free, __FILE__, (char *)__func__, __LINE__));
+	ft_memcpy(new_process, p_process, sizeof(t_process));
+	new_process->pc = p_process->pc + data->t_params[0][0];
+	new_process->end_op = 0;
+	new_process->next = sav_start;
+	new_process->flag = 0;
+	data->tab_champion[i].lst_process = new_process;
 	return (EXIT_SUCCESS);
 }
 
-static int		t_process_del(t_var *data, t_process **start_process,
-					t_process **actual)
+static int		t_process_del(t_var *data, t_process *p_process, int i)
 {
-	t_process	*p_prev;
-	t_process	*p_next;
+	t_process	*save_next;
+	t_process	*tmp_process;
+	t_process	*prev;
 
-	p_next = (*actual)->next;
-	p_prev = (*actual)->prev;
-	if (!p_prev && p_next)
+	save_next = p_process->next;
+	if (p_process == data->tab_champion[i].lst_process)
 	{
-		p_next->prev = NULL;
-		*start_process = p_next;
+		my_free(&data->lst_free, (size_t)p_process);
+		data->tab_champion[i].lst_process = save_next;
 	}
-	else if (p_prev && p_next)
+	else
 	{
-		p_next->prev = p_prev;
-		p_prev->next = p_next;
+		tmp_process = data->tab_champion[i].lst_process;
+		prev = NULL;
+		while (tmp_process && tmp_process != p_process)
+		{
+			prev = tmp_process;
+			tmp_process = tmp_process->next;
+		}
+		my_free(&data->lst_free, (size_t)p_process);
+		prev->next = save_next;
 	}
-	else if (p_prev && !p_next)
-		p_prev->next = NULL;
-	my_free(&data->lst_free, (size_t)*actual);
 	return (EXIT_SUCCESS);
 }
 
@@ -88,7 +98,7 @@ static int		action_cycle_process(t_var *data)
 
 int				cycle_to_die(t_var *data)
 {
-	size_t		i;
+	int			i;
 	t_process	*p_process;
 
 	i = 0;
@@ -98,8 +108,7 @@ int				cycle_to_die(t_var *data)
 		while (p_process)
 		{
 			if (!p_process->nbr_live)
-				t_process_del(data, &data->tab_champion[i].lst_process,
-					&p_process);
+				t_process_del(data, p_process, i);
 			p_process = p_process->next;
 		}
 		data->nb_live += data->tab_champion[i].nb_live;

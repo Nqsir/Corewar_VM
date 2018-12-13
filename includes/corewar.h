@@ -40,7 +40,6 @@ typedef struct			s_process
 	t_reg				registre[REG_NUMBER + 1];
 	int					carry;
 	struct s_process	*next;
-	struct s_process	*prev;
 	int					flag;
 }						t_process;
 
@@ -109,17 +108,17 @@ void					my_auto_free(t_free **lst_free);
 int						my_exit(t_free **lst_free, char *file, char *func,
 							int line);
 
-int						tab_opcode(t_var *data, t_process *p_process);
+int						tab_opcode(t_var *data, t_process *p_process, int i);
 
 int						opcode_add(t_var *data, t_process *p_process);
 int						opcode_aff(t_var *data, t_process *p_process);
 int						opcode_and(t_var *data, t_process *p_process);
-int						opcode_fork(t_var *data, t_process *p_process);
+int						opcode_fork(t_var *data, t_process *p_process, int i);
 int						opcode_ld(t_var *data, t_process *p_process);
 int						opcode_ldi(t_var *data, t_process *p_process);
 int						opcode_lld(t_var *data, t_process *p_process);
 int						opcode_lldi(t_var *data, t_process *p_process);
-int						opcode_lfork(t_var *data, t_process *p_process);
+int						opcode_lfork(t_var *data, t_process *p_process, int i);
 int						opcode_live(t_var *data, t_process *p_process);
 int						opcode_or(t_var *data, t_process *p_process);
 int						opcode_st(t_var *data, t_process *p_process);
@@ -128,7 +127,7 @@ int						opcode_sub(t_var *data, t_process *p_process);
 int						opcode_xor(t_var *data, t_process *p_process);
 int						opcode_zjmp(t_var *data, t_process *p_process);
 
-int						t_process_create(t_var *data, t_process **new_process);
+int						t_process_create(t_var *data, t_process *p_process, int i);
 
 int         			ft_params_opcode(t_var *data, t_process *pc,
 							int dir_oct, int idx);

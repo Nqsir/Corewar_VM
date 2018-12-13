@@ -46,7 +46,7 @@ static void		ft_nbr_live_op_code(t_var *data, t_process *p_process, int i)
 		p_process->flag = 0;
 		data->op_size = 0;
 		ft_bzero(data->t_params, sizeof(data->t_params));
-		tab_opcode(data, p_process);
+		tab_opcode(data, p_process, i);
 	}
 }
 
