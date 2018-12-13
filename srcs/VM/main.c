@@ -47,6 +47,7 @@ static void		ft_init_data_corewar(t_var *data)
 	data->pos_player = 0;
 	data->lst_free = NULL;
 	data->p_p = 0;
+	ft_bzero(data->tab_champion, sizeof(t_champion) * MAX_PLAYERS);
 	ft_init_data_corewar_2(data);
 }
 

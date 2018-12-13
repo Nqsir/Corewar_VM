@@ -23,6 +23,8 @@ int				opcode_live(t_var *data, t_process *p_process)
 		i = 0;
 		while (i < data->nb_champion)
 		{
+			ft_printf("champ_%i\n", i);
+			ft_printf("nbr = %i || param = %i\n", data->tab_champion[i].nbr, data->t_params[0][0]);
 			if(data->tab_champion[i].nbr == data->t_params[0][0])
 			{
 				data->tab_champion[i].nb_live++;

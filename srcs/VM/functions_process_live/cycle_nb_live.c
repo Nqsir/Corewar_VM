@@ -15,14 +15,15 @@
 
 int				t_process_create(t_var *data, t_process *p_process, int i)
 {
-	t_process	*sav_start;
-	t_process	*new_process;
+	t_process				*sav_start;
+	t_process				*new_process;
 
 	sav_start = data->tab_champion[i].lst_process;
 	if (!(new_process = my_memalloc(&data->lst_free, sizeof(t_process))))
 		exit(my_exit(&data->lst_free, __FILE__, (char *)__func__, __LINE__));
 	ft_memcpy(new_process, p_process, sizeof(t_process));
-	new_process->pc = p_process->pc + data->t_params[0][0];
+	new_process->pc = p_process->pc + (data->t_params[0][0] % IDX_MOD);
+	new_process->num = ++data->tab_champion[i].num_proc;
 	new_process->end_op = 0;
 	new_process->next = sav_start;
 	new_process->flag = 0;
@@ -87,8 +88,7 @@ static int		action_cycle_process(t_var *data)
 	}
 	else
 	{
-		ft_printf("CYCLE_TO_DIE\t[RESTART %i]\t: %u\n", data->check_max_check,
-			data->check_cycle_delta);
+		ft_printf("CYCLE_TO_DIE\t[RESTART %i]\t: %u\n", data->check_max_check, data->check_cycle_delta);
 		data->check_max_check--;
 		data->check_cycle += data->check_cycle_delta;
 	}
@@ -104,9 +104,11 @@ int				cycle_to_die(t_var *data)
 	i = 0;
 	while (i < data->nb_champion)
 	{
+		ft_printf("verif  champ : %i  || live = %i\n", i, data->tab_champion[i].nb_live);
 		p_process = data->tab_champion[i].lst_process;
 		while (p_process)
 		{
+			ft_printf("P_%i\n", p_process->num);
 			if (!p_process->nbr_live)
 				t_process_del(data, p_process, i);
 			p_process = p_process->next;

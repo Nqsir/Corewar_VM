@@ -41,12 +41,14 @@ typedef struct			s_process
 	int					carry;
 	struct s_process	*next;
 	int					flag;
+	unsigned long		num;
 }						t_process;
 
 typedef struct			s_champion
 {
 	int					nbr;
 	unsigned long		nb_live;
+	unsigned int		num_proc;
 	t_process			*lst_process;
 	t_header			header;
 }						t_champion;
