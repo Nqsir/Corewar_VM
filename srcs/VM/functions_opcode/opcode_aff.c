@@ -31,10 +31,10 @@ static int		check_aff(t_var *data, unsigned int pc)
 
 int				opcode_aff(t_var *data, t_process *p_process)
 {
-	ft_printf("\n---%s || 0x%x---\n", __func__, data->vm[(p_process->pc + data->op_size) % MEM_SIZE]);
 	if (!check_aff(data, p_process->pc) && !ft_params_opcode(data, p_process, 0, 1))
 	{
-		ft_printf("%c\n", (data->t_params[0][0] % 256));
+		if (data->v == 4 || data->v == 6)
+			ft_printf("P    %i | aff %c\n", p_process->num, (data->t_params[0][0] % 256));
 		p_process->pc =  ((p_process->pc + data->op_size) % MEM_SIZE);
 		return (EXIT_SUCCESS);
 	}

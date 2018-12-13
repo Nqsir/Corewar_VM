@@ -26,7 +26,7 @@ static void		ft_read_str_champ(int fd, long player_nbr, t_var *data, int pos)
 		exit(my_exit(&data->lst_free, __FILE__, (char *)__func__, __LINE__));
 	if (ret > CHAMP_MAX_SIZE)
 		exit(my_exit(&data->lst_free, __FILE__, (char *)__func__, __LINE__));
-	create_champion(data, player_nbr, str);
+	create_champion(data, player_nbr, str, ret);
 	my_free(&data->lst_free, (size_t)str);
 }
 

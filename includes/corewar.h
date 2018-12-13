@@ -49,6 +49,7 @@ typedef struct			s_champion
 	int					nbr;
 	unsigned long		nb_live;
 	unsigned int		num_proc;
+	unsigned int		size;
 	t_process			*lst_process;
 	t_header			header;
 }						t_champion;
@@ -86,13 +87,14 @@ typedef struct			s_var
 	unsigned int		t_params[2][3];
 	unsigned int 		p_p;
 	unsigned int		op_size;
-
+	long				v;
+	unsigned int		id_proc;
 }						t_var;
 
 int						create_vm(t_var *data, unsigned char **virtual_machine,
 							size_t size_vm);
-int						create_champion(t_var *data, unsigned int number,
-							unsigned char *cor);
+int						create_champion(t_var *data, unsigned int nbr,
+							unsigned char *cor, unsigned int size);
 int						cycle_management(t_var *data, unsigned long nb_dump);
 int						cycle_to_die(t_var *data);
 int						stop_corewar(t_var *data);

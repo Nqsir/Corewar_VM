@@ -40,12 +40,15 @@ static void		ft_check_champ(t_var *data, char **av, long len, int n)
 	player_nbr++;
 }
 
-static void		ft_check_visu(t_var *data, int *v)
+static void		ft_check_verbose(t_var *data, char **av, int n)
 {
-	if (*v > 0)
+	if (data->v > 0)
 		exit(my_exit(&data->lst_free, __FILE__, (char *)__func__, __LINE__));
-	*v += 1;
-	//Utiliser visu
+	data->v = ft_atoi(av[n]);
+	if (data->v == 4 || data->v == 6)
+		n += 1;
+	else
+		exit(my_exit(&data->lst_free, __FILE__, (char *)__func__, __LINE__));
 }
 
 static void		ft_check_dump(int n, char **av, int *dump, t_var *data)
@@ -68,17 +71,15 @@ void			ft_check_arg(int ac, char **av, t_var *data)
 	int		n;
 	long	len;
 	int		dump;
-	int		v;
 
 	n = 1;
-	v = 0;
 	dump = 0;
 	while (n < ac)
 	{
 		if (!ft_strcmp(av[n], "-dump"))
 			ft_check_dump(++n, av, &dump, data);
-		else if (!ft_strcmp(av[n], "-v"))
-			ft_check_visu(data, &v);
+		else if (!ft_strcmp(av[n], "-v") && av[n + 1])
+			ft_check_verbose(data, av, ++n);
 		else if ((len = ft_strlen(av[n])) > 4)
 			ft_check_champ(data, av, len, n);
 		else if (!ft_strcmp(av[n], "-n") && av[n + 2])

@@ -13,6 +13,22 @@
 
 #include "corewar.h"
 
+static void		ft_print_intro_vm(t_var *data)
+{
+	int 	i;
+
+	i = 1;
+	ft_printf("Introducing contestants...\n");
+	while (i <= data->nb_champion)
+	{
+		ft_printf("* Player %d, weighing %u bytes, \"%s\" (\"%s\") !\n", i,
+			data->tab_champion[data->nb_champion - i].size,
+			data->tab_champion[data->nb_champion - i].header.prog_name,
+			data->tab_champion[data->nb_champion - i].header.comment);
+		i++;
+	}
+}
+
 static void		ft_init_data_corewar_2(t_var *data)
 {
 	data->op_tab[1] = 10;
@@ -47,6 +63,8 @@ static void		ft_init_data_corewar(t_var *data)
 	data->pos_player = 0;
 	data->lst_free = NULL;
 	data->p_p = 0;
+	data->v = 0;
+	data->id_proc = 0;
 	ft_bzero(data->tab_champion, sizeof(t_champion) * MAX_PLAYERS);
 	ft_init_data_corewar_2(data);
 }
@@ -71,6 +89,7 @@ int				main(int ac, char **av)
 	ft_count_nbr_champs(ac, av, &data);
 	create_vm(&data, &data.vm, MEM_SIZE);
 	ft_check_arg(ac, av, &data);
+	ft_print_intro_vm(&data);
 	cycle_management(&data, data.dump_value);
 	my_auto_free(&data.lst_free);
 	return (EXIT_SUCCESS);

@@ -15,13 +15,16 @@
 
 int				opcode_fork(t_var *data, t_process *p_process, int i)
 {
-	ft_printf("\n---%s || 0x%x---\n", __func__, data->vm[(p_process->pc + data->op_size) % MEM_SIZE]);
 	if (!ft_params_opcode(data, p_process, 2, 0))
 	{
+		if (data->v == 4 || data->v == 6)
+			ft_printf("P    %i | fork %i (%u)\n", p_process->num,
+			data->t_params[0][0],
+			p_process->pc + (data->t_params[0][0] % IDX_MOD));
 		t_process_create(data, p_process, i);
-		p_process->pc =  ((p_process->pc + data->op_size) % MEM_SIZE);
+		p_process->pc = ((p_process->pc + data->op_size) % MEM_SIZE);
 		return (EXIT_SUCCESS);
 	}
-	p_process->pc =  ((p_process->pc + 1) % MEM_SIZE);
+	p_process->pc = ((p_process->pc + 1) % MEM_SIZE);
 	return (EXIT_FAILURE);
 }

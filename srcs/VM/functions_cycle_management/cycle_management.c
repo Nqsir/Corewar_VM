@@ -31,7 +31,8 @@ int				cycle_management(t_var *data, unsigned long nb_dump)
 	while (!data->stop_corewar)
 	{
 		data->cycle++;
-		ft_printf("It is now cycle : %u\n", data->cycle);
+		if (data->v == 6)
+			ft_printf("It is now cycle : %u\n", data->cycle);
 		if (data->cycle == data->check_cycle)
 			cycle_to_die(data);
 		exec_program(data);
