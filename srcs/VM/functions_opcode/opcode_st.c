@@ -46,9 +46,9 @@ int				opcode_st(t_var *data, t_process *p_process)
 	{
 		if (data->t_params[1][1] == 0)
 		{
-			tmp_val[0] = p_process->registre[data->t_params[1][0]].val << 24;
-			tmp_val[1] = p_process->registre[data->t_params[1][0]].val << 16;
-			tmp_val[2] = p_process->registre[data->t_params[1][0]].val << 8;
+			tmp_val[0] = p_process->registre[data->t_params[1][0]].val >> 24;
+			tmp_val[1] = p_process->registre[data->t_params[1][0]].val >> 16;
+			tmp_val[2] = p_process->registre[data->t_params[1][0]].val >> 8;
 			tmp_val[3] = p_process->registre[data->t_params[1][0]].val;
 			i = 0;
 			while (i < REG_SIZE)

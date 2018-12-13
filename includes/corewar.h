@@ -128,10 +128,12 @@ int						opcode_sub(t_var *data, t_process *p_process);
 int						opcode_xor(t_var *data, t_process *p_process);
 int						opcode_zjmp(t_var *data, t_process *p_process);
 
-
 int						t_process_create(t_var *data, t_process **new_process);
 
-int         			ft_params_opcode(t_var *data, t_process *pc, int dir_oct, int idx);
-
+int         			ft_params_opcode(t_var *data, t_process *pc,
+							int dir_oct, int idx);
+/* DEBUG START */
+void		print_t_params(t_var *data);
+/*  DEBUG END  */
 
 #endif
