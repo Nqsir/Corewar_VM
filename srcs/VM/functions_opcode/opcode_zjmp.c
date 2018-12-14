@@ -18,7 +18,7 @@ int				opcode_zjmp(t_var *data, t_process *p_process)
 	if (!ft_params_opcode(data, p_process, 2, 0))
 	{
 		if (data->v == 4 || data->v == 6)
-			ft_printf("P    %i | zjmp %hi", p_process->id,
+			ft_printf("P %4i | zjmp %hi", p_process->id,
 					(short)data->t_params[0][0]);
 		if (p_process->carry == 1)
 		{

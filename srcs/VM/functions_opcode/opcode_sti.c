@@ -56,7 +56,7 @@ int				opcode_sti(t_var *data, t_process *p_process)
 		}
 		if (data->v == 4 || data->v == 6)
 		{
-			ft_printf("P    %i | sti r%i %i %i\n", p_process->id,
+			ft_printf("P %4i | sti r%i %i %i\n", p_process->id,
 					  data->t_params[1][0], data->t_params[0][1],
 					  data->t_params[0][2]);
 			ft_printf("       | -> store to %i + %i = %i (with pc and mod %i)\n",

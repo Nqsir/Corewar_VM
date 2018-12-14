@@ -65,7 +65,7 @@ int				opcode_st(t_var *data, t_process *p_process)
 			p_process->registre[data->t_params[1][1]].val
 				= p_process->registre[data->t_params[1][0]].val;
 			if (data->v == 4 || data->v == 6)
-				ft_printf("P    %i | st r%i %i\n", p_process->id,
+				ft_printf("P %4i | st r%i %i\n", p_process->id,
 					data->t_params[1][0], data->t_params[1][1]);
 		}
 		if (p_process->registre[data->t_params[1][2]].val == 0)

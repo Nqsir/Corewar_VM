@@ -34,7 +34,7 @@ int				opcode_aff(t_var *data, t_process *p_process)
 	if (!check_aff(data, p_process->pc) && !ft_params_opcode(data, p_process, 0, 1))
 	{
 		if (data->v == 4 || data->v == 6)
-			ft_printf("P    %i | aff %c\n", p_process->id, (data->t_params[0][0] % 256));
+			ft_printf("P %4i| aff %c\n", p_process->id, (data->t_params[0][0] % 256));
 		p_process->pc =  ((p_process->pc + data->op_size) % MEM_SIZE);
 		return (EXIT_SUCCESS);
 	}

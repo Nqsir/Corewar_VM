@@ -49,7 +49,7 @@ int				opcode_lldi(t_var *data, t_process *p_process)
 				 + (data->vm[(p_process->pc + tmp_adr + 3) % MEM_SIZE]));
 		if (data->v == 4 || data->v == 6)
 		{
-			ft_printf("P    %i | lldi %i %i r%i\n", p_process->id,
+			ft_printf("P %4i | lldi %i %i r%i\n", p_process->id,
 					  data->t_params[0][0], data->t_params[0][1],
 					  data->t_params[1][2]);
 			ft_printf("       | -> load from %i + %i = %i (with pc %i)\n",

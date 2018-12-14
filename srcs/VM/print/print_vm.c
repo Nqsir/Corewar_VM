@@ -34,12 +34,13 @@ int				print_dump(t_var *data)
         }
         ft_printf("\n");
 	}
+	/*
 	ft_printf("\n===============================================\n");
 	ft_printf("CYCLE            : %u\n", data->cycle);
 	ft_printf("CYCLE_TO_DIE     : %u\n", data->check_cycle_delta);
 	ft_printf("CYCLE_DELTA      : %u\n", CYCLE_DELTA);
 	ft_printf("NBR_LIVE         : %u\n", NBR_LIVE);
 	ft_printf("MAX_CHECKS       : %u\n", MAX_CHECKS);
-	ft_printf("===============================================\n");
+	ft_printf("===============================================\n");*/
 	return (EXIT_SUCCESS);
 }

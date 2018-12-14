@@ -86,14 +86,15 @@ static int		action_cycle_process(t_var *data)
 {
 	if (data->nb_live >= NBR_LIVE || !data->check_max_check)
 	{
-		ft_printf("CYCLE_TO_DIE\t[OK]\t: %u\n", data->check_cycle_delta);
+	//	ft_printf("CYCLE_TO_DIE\t[OK]\t: %u\n", data->check_cycle_delta);
 		data->check_cycle_delta -= CYCLE_DELTA;
 		data->check_cycle += data->check_cycle_delta;
 		data->check_max_check = MAX_CHECKS - 1;
+		if (data->v == 6)
+			ft_printf("Cycle to die is now %i\n", data->check_cycle_delta);
 	}
 	else
 	{
-		ft_printf("CYCLE_TO_DIE\t[RESTART %i]\t: %u\n", data->check_max_check, data->check_cycle_delta);
 		data->check_max_check--;
 		data->check_cycle += data->check_cycle_delta;
 	}

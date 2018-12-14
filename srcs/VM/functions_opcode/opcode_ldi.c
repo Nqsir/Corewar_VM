@@ -42,7 +42,7 @@ int				opcode_ldi(t_var *data, t_process *p_process)
 	if (!check_ldi(data, p_process->pc) && !ft_params_opcode(data, p_process, 2, 1))
 	{
 		if (data->v == 4 || data->v == 6)
-			ft_printf("P    %i | ld %i %i r%i\n", p_process->id,
+			ft_printf("P %4i | ld %i %i r%i\n", p_process->id,
 				data->t_params[0][0], data->t_params[0][1],
 				data->t_params[1][2]);
 		tmp_adr = (data->t_params[0][0] + data->t_params[0][1]) % IDX_MOD;

@@ -34,7 +34,7 @@ int				opcode_add(t_var *data, t_process *p_process)
 	if (!check_add(data, p_process->pc) && !ft_params_opcode(data, p_process, 0, 1))
 	{
 		if (data->v == 4 || data->v == 6)
-			ft_printf("P    %i | add r%i r%i r%i\n", p_process->id,
+			ft_printf("P %4i | add r%i r%i r%i\n", p_process->id,
 			data->t_params[1][0], data->t_params[1][1], data->t_params[1][2]);
 		p_process->registre[data->t_params[1][2]].val =	data->t_params[0][0] + data->t_params[0][1];
 		if (p_process->registre[data->t_params[1][2]].val == 0)

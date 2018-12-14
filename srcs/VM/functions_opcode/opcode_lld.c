@@ -39,7 +39,7 @@ int				opcode_lld(t_var *data, t_process *p_process)
 {
 	if (!check_lld(data, p_process->pc) && !ft_params_opcode(data, p_process, 4, 0))
 	{
-		ft_printf("P    %i | lld %i r%i\n", p_process->id,
+		ft_printf("P %4i| lld %i r%i\n", p_process->id,
 				  data->t_params[0][0], data->t_params[1][1]);
 		p_process->registre[data->t_params[1][1]].val =	data->t_params[0][0];
 		if (p_process->registre[data->t_params[1][1]].val == 0)

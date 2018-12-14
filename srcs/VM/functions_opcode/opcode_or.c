@@ -34,7 +34,7 @@ int				opcode_or(t_var *data, t_process *p_process)
 	if (!check_or(data, p_process->pc) && !ft_params_opcode(data, p_process, 4, 1))
 	{
 		if (data->v == 4 || data->v == 6)
-			ft_printf("P    %i | or %i %i r%i\n", p_process->id,
+			ft_printf("P %4i | or %i %i r%i\n", p_process->id,
 			data->t_params[0][0], data->t_params[0][1], data->t_params[1][2]);
 				p_process->registre[data->t_params[1][2]].val
 					=	(data->t_params[0][0] | data->t_params[0][1]);

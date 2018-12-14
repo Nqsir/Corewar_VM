@@ -20,7 +20,7 @@ int				opcode_live(t_var *data, t_process *p_process)
 	if (!ft_params_opcode(data, p_process, 4, 0))
 	{
 		if (data->v == 4 || data->v == 6)
-			ft_printf("P    %i | live %i\n", p_process->id,
+			ft_printf("P %4i | live %i\n", p_process->id,
 					  data->t_params[0][0]);
 		i = 0;
 		while (i < data->nb_champion)
