@@ -18,10 +18,10 @@ int				opcode_fork(t_var *data, t_process *p_process, int i)
 	if (!ft_params_opcode(data, p_process, 2, 0))
 	{
 		if (data->v == 4 || data->v == 6)
-			ft_printf("P    %i | fork %i (%u)\n", p_process->id,
+			ft_printf("P    %i | fork %hi (%hi)\n", p_process->id,
 			data->t_params[0][0],
-			p_process->pc + (data->t_params[0][0] % IDX_MOD));
-		t_process_create(data, p_process, i);
+			p_process->pc + ((short)data->t_params[0][0] % IDX_MOD));
+		t_process_create(data, p_process, i, 1);
 		p_process->pc = ((p_process->pc + data->op_size) % MEM_SIZE);
 		return (EXIT_SUCCESS);
 	}

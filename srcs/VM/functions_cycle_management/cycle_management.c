@@ -13,8 +13,6 @@
 
 #include "../includes/corewar.h"
 
-
-
 static int		init_cycle_management(t_var *data)
 {
 	data->check_cycle = CYCLE_TO_DIE;
@@ -43,6 +41,9 @@ int				cycle_management(t_var *data, unsigned long nb_dump)
 		}
 		stop_corewar(data);
 	}
-	ft_printf("Contestant %i, \"%s\", has won !\n", data->tab_champion[~data->last_live].nbr, data->tab_champion[~data->last_live].header.prog_name);
+	ft_printf("Contestant %d, \"%s\", has won !\n",
+		~data->tab_champion[data->nb_champion - ~data->last_live - 1].nbr + 1,
+		data->tab_champion[data->nb_champion
+			- ~data->last_live - 1].header.prog_name);
 	return (EXIT_SUCCESS);
 }

@@ -15,16 +15,22 @@
 
 int				opcode_zjmp(t_var *data, t_process *p_process)
 {
-	ft_printf("\n---%s || 0x%x---\n", __func__, data->vm[(p_process->pc + data->op_size) % MEM_SIZE]);
 	if (!ft_params_opcode(data, p_process, 2, 0))
 	{
+		if (data->v == 4 || data->v == 6)
+			ft_printf("P    %i | zjmp %hi", p_process->id,
+					(short)data->t_params[0][0]);
 		if (p_process->carry == 1)
 		{
-			p_process->pc = ((p_process->pc + data->t_params[0][0]) % MEM_SIZE);
+			if (data->v == 4 || data->v == 6)
+				ft_printf(" OK\n");
+			p_process->pc = ((p_process->pc + (short)data->t_params[0][0]) % MEM_SIZE);
 			return (EXIT_SUCCESS);
 		}
 		else
 		{
+			if (data->v == 4 || data->v == 6)
+				ft_printf(" FAILED\n");
 			p_process->pc = ((p_process->pc + data->op_size) % MEM_SIZE);
 			return (EXIT_SUCCESS);
 		}

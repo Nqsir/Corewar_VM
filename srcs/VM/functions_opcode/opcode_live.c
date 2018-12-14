@@ -17,9 +17,11 @@ int				opcode_live(t_var *data, t_process *p_process)
 {
 	size_t	i;
 
-	ft_printf("\n---%s || 0x%x---\n", __func__, data->vm[(p_process->pc + data->op_size) % MEM_SIZE]);
 	if (!ft_params_opcode(data, p_process, 4, 0))
 	{
+		if (data->v == 4 || data->v == 6)
+			ft_printf("P    %i | live %i\n", p_process->id,
+					  data->t_params[0][0]);
 		i = 0;
 		while (i < data->nb_champion)
 		{
@@ -32,7 +34,6 @@ int				opcode_live(t_var *data, t_process *p_process)
 			}
 			i++;
 		}
-		ft_printf("last live = %i\n", data->last_live);
 		p_process->nbr_live++;
 		p_process->pc = ((p_process->pc + data->op_size) % MEM_SIZE);
 		return (EXIT_SUCCESS);

@@ -39,7 +39,6 @@ int				opcode_lldi(t_var *data, t_process *p_process)
 {
 	unsigned int	tmp_adr;
 
-	ft_printf("\n---%s || 0x%x---\n", __func__, data->vm[(p_process->pc + data->op_size) % MEM_SIZE]);
 	if (!check_lldi(data, p_process->pc) && !ft_params_opcode(data, p_process, 2, 0))
 	{
 		tmp_adr = (data->t_params[0][0] + data->t_params[0][1]);
@@ -48,6 +47,16 @@ int				opcode_lldi(t_var *data, t_process *p_process)
 				 +  (data->vm[(p_process->pc + tmp_adr + 1) % MEM_SIZE] << 16)
 				 + (data->vm[(p_process->pc + tmp_adr + 2) % MEM_SIZE] << 8)
 				 + (data->vm[(p_process->pc + tmp_adr + 3) % MEM_SIZE]));
+		if (data->v == 4 || data->v == 6)
+		{
+			ft_printf("P    %i | lldi %i %i r%i\n", p_process->id,
+					  data->t_params[0][0], data->t_params[0][1],
+					  data->t_params[1][2]);
+			ft_printf("       | -> load from %i + %i = %i (with pc %i)\n",
+					  data->t_params[0][0], data->t_params[0][1],
+					  (data->t_params[0][0] + data->t_params[0][1]),
+					  (p_process->pc + tmp_adr));
+		}
 		if (p_process->registre[data->t_params[1][2]].val == 0)
 			p_process->carry = 1;
 		else

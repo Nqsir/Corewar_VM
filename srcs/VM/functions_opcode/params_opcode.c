@@ -24,9 +24,11 @@ static int	ft_indirect(t_var *data, t_process *proc, int dir_oct, int idx)
 	if (data->vm[proc->pc] == 0x03)
 		data->t_params[0][data->p_p] = val;
 	else if (data->vm[proc->pc] == 0x0d)
+	{
 		data->t_params[0][data->p_p] =
-			(data->vm[(proc->pc + val) % MEM_SIZE] << 8)
-			+ data->vm[(proc->pc + val + 1) % MEM_SIZE];
+				(data->vm[(proc->pc + val) % MEM_SIZE] << 8)
+				+ data->vm[(proc->pc + val + 1) % MEM_SIZE];
+	}
 	else
 		data->t_params[0][data->p_p] =
 			(data->vm[(proc->pc + val) % MEM_SIZE] << 24)
