@@ -28,6 +28,6 @@ int			create_champion(t_var *data, unsigned int nbr, unsigned char *cor,
 	data->tab_champion[data->pos_player].lst_process->pc = ((MEM_SIZE/ data->nb_champion) * data->pos_player);
 	ft_memcpy(&data->vm[data->tab_champion[data->pos_player].lst_process->pc],
 			cor, data->tab_champion[data->pos_player].header.prog_size);
-	data->tab_champion[data->pos_player].lst_process->num = ++data->id_proc;
+	data->tab_champion[data->pos_player].lst_process->id = ++data->id_proc;
 	return (EXIT_SUCCESS);
 }

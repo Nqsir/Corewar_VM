@@ -15,19 +15,35 @@
 
 int				t_process_create(t_var *data, t_process *p_process, int i)
 {
-	t_process				*sav_start;
-	t_process				*new_process;
+	t_process		*sav_start;
+	t_process		*new_process;
+	t_process		*tmp_process;
 
 	sav_start = data->tab_champion[i].lst_process;
 	if (!(new_process = my_memalloc(&data->lst_free, sizeof(t_process))))
 		exit(my_exit(&data->lst_free, __FILE__, (char *)__func__, __LINE__));
 	ft_memcpy(new_process, p_process, sizeof(t_process));
 	new_process->pc = p_process->pc + (data->t_params[0][0] % IDX_MOD);
-	new_process->num = ++data->tab_champion[i].num_proc;
+	new_process->id = ++data->id_proc;
 	new_process->end_op = 0;
 	new_process->next = sav_start;
 	new_process->flag = 0;
 	data->tab_champion[i].lst_process = new_process;
+
+	tmp_process = data->tab_champion[i].lst_process;
+	/*ft_printf("num_proc = %i\n", data->tab_champion[i].num_proc);
+	while (tmp_process)
+	{
+		ft_printf("PC[%i]  = %i\n",tmp_process->id, tmp_process->pc);
+		ft_printf("nb_live = %i\n",tmp_process->nbr_live);
+		ft_printf("end_op  = %i\n",tmp_process->end_op);
+		ft_printf("flag    = %i\n",tmp_process->flag);
+		ft_printf("carry   = %i\n",tmp_process->carry);
+		tmp_process = tmp_process->next;
+	}*/
+
+
+
 	return (EXIT_SUCCESS);
 }
 
@@ -104,11 +120,11 @@ int				cycle_to_die(t_var *data)
 	i = 0;
 	while (i < data->nb_champion)
 	{
-		ft_printf("verif  champ : %i  || live = %i\n", i, data->tab_champion[i].nb_live);
+		//ft_printf("verif  champ : %i  || live = %i\n", i, data->tab_champion[i].nb_live);
 		p_process = data->tab_champion[i].lst_process;
 		while (p_process)
 		{
-			ft_printf("P_%i\n", p_process->num);
+			//ft_printf("P_%i\n", p_process->id);
 			if (!p_process->nbr_live)
 				t_process_del(data, p_process, i);
 			p_process = p_process->next;

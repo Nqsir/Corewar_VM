@@ -41,7 +41,7 @@ typedef struct			s_process
 	int					carry;
 	struct s_process	*next;
 	int					flag;
-	unsigned long		num;
+	unsigned long		id;
 }						t_process;
 
 typedef struct			s_champion
