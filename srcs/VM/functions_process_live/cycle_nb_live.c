@@ -28,6 +28,8 @@ int				t_process_create(t_var *data, t_process *p_process, int i,
 			+ ((short)data->t_params[0][0] % IDX_MOD);
 	else
 		new_process->pc = p_process->pc + ((short)data->t_params[0][0]);
+	if ((short)new_process->pc < 0)
+		new_process->pc = MEM_SIZE - new_process->pc;
 	new_process->id = ++data->id_proc;
 	new_process->end_op = 0;
 	new_process->next = sav_start;

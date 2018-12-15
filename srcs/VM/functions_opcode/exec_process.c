@@ -46,6 +46,7 @@ static void		ft_nbr_live_op_code(t_var *data, t_process *p_process, int i)
 		p_process->flag = 0;
 		data->op_size = 0;
 		ft_bzero(data->t_params, sizeof(data->t_params));
+		ft_printf("SANGLIER = %d\n", data->tab_champion[i].nbr);
 		tab_opcode(data, p_process, i);
 	}
 }
@@ -60,9 +61,7 @@ static void		ft_no_flag_p_process(t_var *data, t_process *p_process, int i)
 		p_process->end_op = data->cycle + (data->op_tab[data->vm[p_process->pc]]) - 1;
 	}
 	else
-	{
 		p_process->pc++;
-	}
 }
 
 int				exec_program(t_var *data)

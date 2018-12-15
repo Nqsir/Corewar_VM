@@ -51,10 +51,11 @@ int				opcode_ldi(t_var *data, t_process *p_process)
 				   +  (data->vm[(p_process->pc + tmp_adr + 1) % MEM_SIZE] << 16)
 				   + (data->vm[(p_process->pc + tmp_adr + 2) % MEM_SIZE] << 8)
 				   + (data->vm[(p_process->pc + tmp_adr + 3) % MEM_SIZE]));
-		ft_printf("       | -> load from %i + %i = %i (with pc and mod %i)\n",
-			data->t_params[0][0], data->t_params[0][1],
-			(data->t_params[0][0] + data->t_params[0][1]),
-			(p_process->pc + tmp_adr) % MEM_SIZE);
+		if (data->v == 4 || data->v == 6)
+			ft_printf("       | -> load from %i + %i = %i (with pc and mod %i)\n",
+				data->t_params[0][0], data->t_params[0][1],
+				(data->t_params[0][0] + data->t_params[0][1]),
+				(p_process->pc + tmp_adr) % MEM_SIZE);
 		if (p_process->registre[data->t_params[1][2]].val == 0)
 			p_process->carry = 1;
 		else

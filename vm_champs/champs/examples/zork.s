@@ -1,12 +1,12 @@
 .name "zork"
 .comment "I'M ALIIIIVE"
 
-#l2:		sti r1, %:live, %1
+;l2:		sti r1, %:live, %1
 
 bite:	sti     r1, %:live, %1
         #ld      %2147483647, r2
         #st      r2, 40
-        ld      %0, r5
+        ld      %0,r5
         fork    %517
         #ld 525, r3
         #and -7, 15, r4
