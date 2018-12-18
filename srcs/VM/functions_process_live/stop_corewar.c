@@ -27,7 +27,7 @@ int				stop_corewar(t_var *data)
 		p_process = p_process->next;
 	}
 	//ft_printf("cycle_delta = %i || check_cycle_delta = %i\n", CYCLE_DELTA, data->check_cycle_delta);
-	if (nb_proces == 0)
+	if (nb_proces == 0 || (long)data->check_cycle_delta < 0)
 		data->stop_corewar = 1;
 	return (EXIT_SUCCESS);
 }

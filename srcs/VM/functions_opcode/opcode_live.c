@@ -35,9 +35,9 @@ int				opcode_live(t_var *data, t_process *p_process)
 			i++;
 		}
 		p_process->nbr_live++;
-		p_process->pc = ((p_process->pc + data->op_size) % MEM_SIZE);
+		p_process->pc = ((p_process->pc + 5) % MEM_SIZE);
 		return (EXIT_SUCCESS);
 	}
-	p_process->pc = ((p_process->pc + p_process->pc) % MEM_SIZE);
+	p_process->pc = ((p_process->pc + 5) % MEM_SIZE);
 	return (EXIT_FAILURE);
 }

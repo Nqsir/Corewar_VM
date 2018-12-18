@@ -36,10 +36,10 @@ int				opcode_zjmp(t_var *data, t_process *p_process)
 		{
 			if (data->v == 4 || data->v == 6)
 				ft_printf(" FAILED\n");
-			p_process->pc = ((p_process->pc + data->op_size) % MEM_SIZE);
+			p_process->pc = ((p_process->pc + 3) % MEM_SIZE);
 			return (EXIT_SUCCESS);
 		}
 	}
-	p_process->pc = ((p_process->pc + data->op_size) % MEM_SIZE);
+	p_process->pc = ((p_process->pc + 3) % MEM_SIZE);
 	return (EXIT_FAILURE);
 }

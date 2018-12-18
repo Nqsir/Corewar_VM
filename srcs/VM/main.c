@@ -52,7 +52,7 @@ static void		ft_init_data_corewar_2(t_var *data)
 static void		ft_init_data_corewar(t_var *data)
 {
 	data->vm = NULL;
-	data->cycle = 0;
+	data->cycle = 1;
 	data->check_cycle = 0;
 	data->check_cycle_delta = 0;
 	data->check_max_check = 0;

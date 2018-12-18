@@ -13,28 +13,38 @@
 
 #include "../includes/corewar.h"
 
-static int		check_aff(t_var *data, unsigned int pc)
+static int		check_aff(t_var *data, unsigned int pc, int dir_oct)
 {
-	unsigned char	p_1;
+	unsigned char	p[1];
+	size_t 			i;
 
-	p_1 = data->vm[pc + 1] >> 6;
-	if (!(p_1 & REG_CODE))
+	i = 0;
+	p[i] = data->vm[pc + 1] >> 6;
+	data->op_size += 1;
+	while (i < 1)
 	{
-		data->op_size += 1 + p_1;
-		return (EXIT_FAILURE);
+		if (p[i] == 0x1)
+			data->op_size += 1;
+		else if (p[i] == 0x2)
+			dir_oct == 2 ? (data->op_size += 2) : (data->op_size += 4);
+		else if (p[i] == 0x03)
+			data->op_size += 2;
+		i++;
 	}
+	if (!(p[0] & REG_CODE))
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
 int				opcode_aff(t_var *data, t_process *p_process)
 {
-	if (!check_aff(data, p_process->pc) && !ft_params_opcode(data, p_process, 0, 1))
+	if (!check_aff(data, p_process->pc, 4) && !ft_params_opcode(data, p_process, 4, 1))
 	{
 		if (data->v == 4 || data->v == 6)
 			ft_printf("P %4i| aff %c\n", p_process->id, (data->t_params[0][0] % 256));
 		p_process->pc =  ((p_process->pc + data->op_size) % MEM_SIZE);
 		return (EXIT_SUCCESS);
 	}
-	p_process->pc =  ((p_process->pc + p_process->pc) % MEM_SIZE);
+	p_process->pc =  ((p_process->pc + data->op_size) % MEM_SIZE);
 	return (EXIT_FAILURE);
 }

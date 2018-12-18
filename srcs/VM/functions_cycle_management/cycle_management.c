@@ -40,7 +40,6 @@ int				cycle_management(t_var *data, unsigned long nb_dump)
 	init_cycle_management(data);
 	while (!data->stop_corewar)
 	{
-		data->cycle++;
 		if (data->v == 6)
 			ft_printf("It is now cycle %u\n", data->cycle);
 		exec_program(data);
@@ -53,11 +52,16 @@ int				cycle_management(t_var *data, unsigned long nb_dump)
 			data->stop_corewar = 1;
 		}
 		stop_corewar(data);
+		data->cycle++;
 	}
 	if (!end_dump)
+	{
+		if (data->v == 6)
+			ft_printf("It is now cycle %u\n", data->cycle);
 		ft_printf("Contestant %d, \"%s\", has won !\n",
-		~data->tab_champion[data->nb_champion - ~data->last_live - 1].nbr + 1,
-		data->tab_champion[data->nb_champion
-		- ~data->last_live - 1].header.prog_name);
+			~data->tab_champion[data->nb_champion - ~data->last_live -
+			1].nbr + 1, data->tab_champion[data->nb_champion
+			- ~data->last_live - 1].header.prog_name);
+	}
 	return (EXIT_SUCCESS);
 }

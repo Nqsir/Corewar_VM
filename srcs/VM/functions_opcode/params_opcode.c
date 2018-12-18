@@ -70,7 +70,7 @@ static int	ft_registre(t_var *data, t_process *proc, int *n)
 	unsigned int	r_num;
 
 	data->t_params[1][data->p_p] =
-		data->vm[(proc->pc + data->op_size) % MEM_SIZE];
+		data->vm[(proc->pc + *n) % MEM_SIZE];
 	r_num = data->t_params[1][data->p_p];
 	if (r_num < 1 || r_num > REG_NUMBER)
 		return (EXIT_FAILURE);

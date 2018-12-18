@@ -70,7 +70,7 @@ int				exec_program(t_var *data)
 	p_process = data->lst_process;
 	while (p_process)
 	{
-		ft_printf("\t\tpc = 0x%.2x || pc = %i || VM[%i]\n",data->vm[p_process->pc],p_process->id, p_process->pc);
+		//ft_printf("\t\tpc = 0x%.2x || pc = %i || VM[%i]\n",data->vm[p_process->pc],p_process->id, p_process->pc);
 		if (!p_process->flag)
 			ft_no_flag_p_process(data, p_process);
 		else if (p_process->end_op == data->cycle)
