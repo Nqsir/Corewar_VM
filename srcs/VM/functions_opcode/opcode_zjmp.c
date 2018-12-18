@@ -26,9 +26,9 @@ int				opcode_zjmp(t_var *data, t_process *p_process)
 		{
 			if (data->v == 4 || data->v == 6)
 				ft_printf(" OK\n");
-			val = ((p_process->pc + (short)data->t_params[0][0]) % MEM_SIZE);
-			if (val < 0)
-				val = MEM_SIZE - p_process->pc;
+			val = ((p_process->pc + ((short)data->t_params[0][0] % IDX_MOD)) % MEM_SIZE);
+			//if (val < 0)
+			//	val = MEM_SIZE - p_process->pc;
 			p_process->pc = val;
 			return (EXIT_SUCCESS);
 		}
