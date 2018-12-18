@@ -16,16 +16,13 @@
 static int		check_aff(t_var *data, unsigned int pc)
 {
 	unsigned char	p_1;
-	unsigned char	p_2;
-	unsigned char	p_3;
-	unsigned char	p_4;
 
 	p_1 = data->vm[pc + 1] >> 6;
-	p_2 = (unsigned char)(0x3 & (data->vm[pc + 1] >> 4));
-	p_3 = (unsigned char)(0x3 & (data->vm[pc + 1] >> 2));
-	p_4 = (unsigned char)(0x3 & data->vm[pc + 1]);
-	if (!(p_1 & REG_CODE) || p_2 || p_3 || p_4)
+	if (!(p_1 & REG_CODE))
+	{
+		data->op_size += 1 + p_1;
 		return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }
 
@@ -38,6 +35,6 @@ int				opcode_aff(t_var *data, t_process *p_process)
 		p_process->pc =  ((p_process->pc + data->op_size) % MEM_SIZE);
 		return (EXIT_SUCCESS);
 	}
-	p_process->pc =  ((p_process->pc + 1) % MEM_SIZE);
+	p_process->pc =  ((p_process->pc + p_process->pc) % MEM_SIZE);
 	return (EXIT_FAILURE);
 }

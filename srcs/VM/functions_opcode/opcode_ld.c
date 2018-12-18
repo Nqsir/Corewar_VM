@@ -31,7 +31,10 @@ static int		check_ld(t_var *data, unsigned int pc)
 	else if (p_1 == IND_CODE)
 		test = p_1;
 	if (!(test) || !(p_2 & REG_CODE) || p_3 || p_4)
+	{
+		data->op_size++;
 		return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }
 
@@ -46,9 +49,9 @@ int				opcode_ld(t_var *data, t_process *p_process)
 			p_process->carry = 1;
 		else
 			p_process->carry = 0;
-		p_process->pc =  ((p_process->pc + data->op_size) % MEM_SIZE);
+		p_process->pc = ((p_process->pc + data->op_size) % MEM_SIZE);
 		return (EXIT_SUCCESS);
 	}
-	p_process->pc =  ((p_process->pc + data->op_size) % MEM_SIZE);
+	p_process->pc = ((p_process->pc + data->op_size) % MEM_SIZE);
 	return (EXIT_FAILURE);
 }

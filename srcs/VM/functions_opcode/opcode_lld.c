@@ -31,7 +31,10 @@ static int		check_lld(t_var *data, unsigned int pc)
 	else if (p_1 == IND_CODE)
 		test = p_1;
 	if (!(test) || !(p_2 & REG_CODE) || p_3 || p_4)
+	{
+		data->op_size++;
 		return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }
 

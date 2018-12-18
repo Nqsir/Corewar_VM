@@ -31,7 +31,10 @@ static int		check_ldi(t_var *data, unsigned int pc)
 	else if (p_2 == DIR_CODE)
 		test = p_2;
 	if (!(p_1 & 0x3) || !(test) || !(p_3 & REG_CODE) || p_4)
+	{
+		data->op_size++;
 		return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }
 
@@ -42,10 +45,10 @@ int				opcode_ldi(t_var *data, t_process *p_process)
 	if (!check_ldi(data, p_process->pc) && !ft_params_opcode(data, p_process, 2, 1))
 	{
 		if (data->v == 4 || data->v == 6)
-			ft_printf("P %4i | ld %i %i r%i\n", p_process->id,
+			ft_printf("P %4i | ldi %i %i r%i\n", p_process->id,
 				data->t_params[0][0], data->t_params[0][1],
 				data->t_params[1][2]);
-		tmp_adr = (data->t_params[0][0] + data->t_params[0][1]) % IDX_MOD;
+		tmp_adr = (short)(data->t_params[0][0] + data->t_params[0][1]) % IDX_MOD;
 		p_process->registre[data->t_params[1][2]].val =
 				((data->vm[(p_process->pc + tmp_adr) % MEM_SIZE] << 24)
 				   +  (data->vm[(p_process->pc + tmp_adr + 1) % MEM_SIZE] << 16)
@@ -63,6 +66,6 @@ int				opcode_ldi(t_var *data, t_process *p_process)
 		p_process->pc =  ((p_process->pc + data->op_size) % MEM_SIZE);
 		return (EXIT_SUCCESS);
 	}
-	p_process->pc =  ((p_process->pc + 1) % MEM_SIZE);
+	p_process->pc =  ((p_process->pc + p_process->pc) % MEM_SIZE);
 	return (EXIT_FAILURE);
 }

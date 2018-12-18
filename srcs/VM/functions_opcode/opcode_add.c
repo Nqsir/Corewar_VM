@@ -18,14 +18,15 @@ static int		check_add(t_var *data, unsigned int pc)
 	unsigned char	p_1;
 	unsigned char	p_2;
 	unsigned char	p_3;
-	unsigned char	p_4;
 
 	p_1 = data->vm[pc + 1] >> 6;
 	p_2 = (unsigned char)(0x3 & (data->vm[pc + 1] >> 4));
 	p_3 = (unsigned char)(0x3 & (data->vm[pc + 1] >> 2));
-	p_4 = (unsigned char)(0x3 & data->vm[pc + 1]);
-	if (!(p_1 & REG_CODE) || !(p_2 & REG_CODE) || !(p_3 & REG_CODE) || p_4)
+	if (!(p_1 & REG_CODE) || !(p_2 & REG_CODE) || !(p_3 & REG_CODE))
+	{
+		data->op_size += 1 + p_1 + p_2 + p_3;
 		return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }
 
@@ -41,9 +42,9 @@ int				opcode_add(t_var *data, t_process *p_process)
 			p_process->carry = 1;
 		else
 			p_process->carry = 0;
-		p_process->pc =  ((p_process->pc + data->op_size) % MEM_SIZE);
+		p_process->pc = ((p_process->pc + data->op_size) % MEM_SIZE);
 		return (EXIT_SUCCESS);
 	}
-	p_process->pc =  ((p_process->pc + data->op_size) % MEM_SIZE);
+	p_process->pc = ((p_process->pc + data->op_size) % MEM_SIZE);
 	return (EXIT_FAILURE);
 }

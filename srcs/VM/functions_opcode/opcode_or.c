@@ -25,7 +25,10 @@ static int		check_or(t_var *data, unsigned int pc)
 	p_3 = (unsigned char)(0x3 & (data->vm[pc + 1] >> 2));
 	p_4 = (unsigned char)(0x3 & data->vm[pc + 1]);
 	if (!(p_1 & 0x3) || !(p_2 & 0x3) || !(p_3 & REG_CODE) || p_4)
+	{
+		data->op_size++;
 		return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }
 
@@ -46,6 +49,6 @@ int				opcode_or(t_var *data, t_process *p_process)
 		p_process->pc =  ((p_process->pc + data->op_size) % MEM_SIZE);
 		return (EXIT_SUCCESS);
 	}
-	p_process->pc =  ((p_process->pc + 1) % MEM_SIZE);
+	p_process->pc =  ((p_process->pc + p_process->pc) % MEM_SIZE);
 	return (EXIT_FAILURE);
 }

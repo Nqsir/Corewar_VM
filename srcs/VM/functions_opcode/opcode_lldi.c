@@ -31,7 +31,10 @@ static int		check_lldi(t_var *data, unsigned int pc)
 	else if (p_2 == DIR_CODE)
 		test = p_2;
 	if (!(p_1 & 0x3) || !(test) || !(p_3 & REG_CODE) || p_4)
+	{
+		data->op_size++;
 		return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }
 
@@ -61,9 +64,9 @@ int				opcode_lldi(t_var *data, t_process *p_process)
 			p_process->carry = 1;
 		else
 			p_process->carry = 0;
-		p_process->pc =  ((p_process->pc + data->op_size) % MEM_SIZE);
+		p_process->pc = ((p_process->pc + data->op_size) % MEM_SIZE);
 		return (EXIT_SUCCESS);
 	}
-	p_process->pc =  ((p_process->pc + 1) % MEM_SIZE);
+	p_process->pc = ((p_process->pc + data->op_size) % MEM_SIZE);
 	return (EXIT_FAILURE);
 }

@@ -31,7 +31,10 @@ static int		check_st(t_var *data, unsigned int pc)
 	else if (p_2 == IND_CODE)
 		test = p_2;
 	if (!(p_1 & REG_CODE) || !(test) || p_3 || p_4)
+	{
+		data->op_size++;
 		return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }
 
@@ -75,6 +78,6 @@ int				opcode_st(t_var *data, t_process *p_process)
 		p_process->pc =  ((p_process->pc + data->op_size) % MEM_SIZE);
 		return (EXIT_SUCCESS);
 	}
-	p_process->pc =  ((p_process->pc + 1) % MEM_SIZE);
+	p_process->pc =  ((p_process->pc + p_process->pc) % MEM_SIZE);
 	return (EXIT_FAILURE);
 }

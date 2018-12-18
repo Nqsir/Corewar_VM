@@ -15,16 +15,16 @@
 
 int				stop_corewar(t_var *data)
 {
-	size_t			i;
 	unsigned long	nb_proces;
+	t_process	*p_process;
 
-	i = 0;
 	nb_proces = 0;
-	while (i < data->nb_champion)
+	p_process = data->lst_process;
+	while (p_process)
 	{
-		if (data->tab_champion[i].lst_process)
+		if (data->lst_process)
 			nb_proces++;
-		i++;
+		p_process = p_process->next;
 	}
 	//ft_printf("cycle_delta = %i || check_cycle_delta = %i\n", CYCLE_DELTA, data->check_cycle_delta);
 	if (nb_proces == 0)

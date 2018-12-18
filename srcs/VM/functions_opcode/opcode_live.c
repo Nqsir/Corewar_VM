@@ -21,7 +21,7 @@ int				opcode_live(t_var *data, t_process *p_process)
 	{
 		if (data->v == 4 || data->v == 6)
 			ft_printf("P %4i | live %i\n", p_process->id,
-					  data->t_params[0][0]);
+				data->t_params[0][0]);
 		i = 0;
 		while (i < data->nb_champion)
 		{
@@ -38,6 +38,6 @@ int				opcode_live(t_var *data, t_process *p_process)
 		p_process->pc = ((p_process->pc + data->op_size) % MEM_SIZE);
 		return (EXIT_SUCCESS);
 	}
-	p_process->pc = ((p_process->pc + 1) % MEM_SIZE);
+	p_process->pc = ((p_process->pc + p_process->pc) % MEM_SIZE);
 	return (EXIT_FAILURE);
 }
