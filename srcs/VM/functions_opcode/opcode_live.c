@@ -27,13 +27,12 @@ int				opcode_live(t_var *data, t_process *p_process)
 		{
 			if(data->tab_champion[i].nbr == data->t_params[0][0])
 			{
-				//ft_printf("champ %i : VIVANT\n", i);
-				data->tab_champion[i].nb_live++;
 				data->last_live = data->t_params[0][0];
 				break;
 			}
 			i++;
 		}
+		data->nb_live++;
 		p_process->nbr_live++;
 		p_process->pc = ((p_process->pc + 5) % MEM_SIZE);
 		return (EXIT_SUCCESS);

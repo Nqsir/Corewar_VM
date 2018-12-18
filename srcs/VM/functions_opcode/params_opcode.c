@@ -112,14 +112,15 @@ static int	ft_split_params(t_var *data, t_process *proc, int dir_oct, int idx)
 int			ft_params_opcode(t_var *data, t_process *proc, int dir_oct,
 				int idx)
 {
-	if (data->vm[((proc->pc) % MEM_SIZE)] == 0x0c || data->vm[(proc->pc)
-		% MEM_SIZE] == 0x0f || data->vm[(proc->pc) % MEM_SIZE] == 0x09)
+	if (proc->mem_op_code == 0x0c || proc->mem_op_code == 0x0f
+		|| proc->mem_op_code == 0x09)
 	{
 		data->t_params[0][0] =
 			((data->vm[(proc->pc + 1) % MEM_SIZE] << 8)
 			+ data->vm[(proc->pc + 2) % MEM_SIZE]);
+		//ft_printf("data_tparam = %hd\n", data->t_params[0][0]);
 	}
-	else if (data->vm[(proc->pc) % MEM_SIZE] == 0x01)
+	else if (proc->mem_op_code == 0x01)
 	{
 		data->t_params[0][0] =
 			((data->vm[(proc->pc + 1) % MEM_SIZE] << (OCT * 3))

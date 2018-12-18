@@ -42,13 +42,12 @@ typedef struct			s_process
 	struct s_process	*next;
 	int					flag;
 	unsigned long		id;
+	unsigned char		mem_op_code;
 }						t_process;
 
 typedef struct			s_champion
 {
 	int					nbr;
-	unsigned long		nb_live;
-	unsigned int		num_proc;
 	unsigned int		size;
 	t_header			header;
 }						t_champion;

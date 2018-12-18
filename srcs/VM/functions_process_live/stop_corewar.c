@@ -15,19 +15,19 @@
 
 int				stop_corewar(t_var *data)
 {
-	unsigned long	nb_proces;
+	unsigned long	nb_process;
 	t_process	*p_process;
 
-	nb_proces = 0;
+	nb_process = 0;
 	p_process = data->lst_process;
 	while (p_process)
 	{
 		if (data->lst_process)
-			nb_proces++;
+			nb_process++;
 		p_process = p_process->next;
 	}
 	//ft_printf("cycle_delta = %i || check_cycle_delta = %i\n", CYCLE_DELTA, data->check_cycle_delta);
-	if (nb_proces == 0 || (long)data->check_cycle_delta < 0)
+	if (nb_process == 0 || (long)data->check_cycle_delta < 0)
 		data->stop_corewar = 1;
 	return (EXIT_SUCCESS);
 }

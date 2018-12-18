@@ -99,10 +99,8 @@ static int		action_cycle_process(t_var *data)
 
 int				cycle_to_die(t_var *data)
 {
-	int			i;
 	t_process	*p_process;
 
-	i = 0;
 	//ft_printf("verif  champ : %i  || live = %i\n", i, data->tab_champion[i].nb_live);
 	p_process = data->lst_process;
 	while (p_process)
@@ -111,12 +109,6 @@ int				cycle_to_die(t_var *data)
 		if (!p_process->nbr_live)
 			t_process_del(data, p_process);
 		p_process = p_process->next;
-	}
-	while (i < data->nb_champion)
-	{
-		data->nb_live += data->tab_champion[i].nb_live;
-		data->tab_champion[i].nb_live = 0;
-		i++;
 	}
 	action_cycle_process(data);
 	update_cycle_process(data);

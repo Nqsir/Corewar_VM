@@ -40,7 +40,6 @@ int				create_champion(t_var *data, unsigned int nbr,
 					unsigned char *cor, unsigned int size)
 {
 	data->tab_champion[data->pos_player].size = size;
-	data->tab_champion[data->pos_player].nb_live = 0;
 	data->tab_champion[data->pos_player].nbr = ~nbr;
 	ft_first_proc(data, nbr);
 	ft_memcpy(&data->vm[data->lst_process->pc],

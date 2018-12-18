@@ -55,6 +55,7 @@ static void		ft_no_flag_p_process(t_var *data, t_process *p_process)
 	//ft_printf("        Process(%i) IN       ==>  PC = 0x%0.2x  ||  index = %i  ||  flag = %i  || end_op = %i  || cycle = %i\n", p_process->pc, data->vm[p_process->pc], p_process->pc, p_process->flag, p_process->end_op, data->cycle);
 	if (!ft_is_op_code(data, p_process))
 	{
+		p_process->mem_op_code = data->vm[p_process->pc];
 		p_process->flag = 1;
 		p_process->end_op = data->cycle + (data->op_tab[data->vm[p_process->pc]]) - 1;
 	}
@@ -70,7 +71,7 @@ int				exec_program(t_var *data)
 	p_process = data->lst_process;
 	while (p_process)
 	{
-		//ft_printf("\t\tpc = 0x%.2x || pc = %i || VM[%i]\n",data->vm[p_process->pc],p_process->id, p_process->pc);
+		ft_printf("\t\tpc = 0x%.2x || pc = %i || VM[%i]\n",data->vm[p_process->pc],p_process->id, p_process->pc);
 		if (!p_process->flag)
 			ft_no_flag_p_process(data, p_process);
 		else if (p_process->end_op == data->cycle)
