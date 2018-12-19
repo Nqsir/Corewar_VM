@@ -23,7 +23,7 @@ static void		ft_first_proc(t_var *data, unsigned int nbr)
 		exit(my_exit(&data->lst_free, __FILE__, (char *) __func__, __LINE__));
 	new_process->next = NULL;
 	new_process->id = ++data->id_proc;
-	new_process->pc = ((MEM_SIZE / (data->nb_champion)) * nbr);
+	new_process->pc = ((MEM_SIZE / (data->nb_champion)) * (data->nb_champion - data->pos_player - 1));
 	new_process->registre[1].val = ~nbr;
 	new_process->flag = 0;
 	new_process->end_op = 0;
@@ -44,5 +44,7 @@ int				create_champion(t_var *data, unsigned int nbr,
 	ft_first_proc(data, nbr);
 	ft_memcpy(&data->vm[data->lst_process->pc],
 			  cor, data->tab_champion[data->pos_player].header.prog_size);
+	ft_printf("nbr = %i\n", ~data->tab_champion[data->pos_player].nbr);
+	ft_printf("pos = %i\n", data->pos_player);
 	return (EXIT_SUCCESS);
 }

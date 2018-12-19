@@ -21,6 +21,7 @@ static int		init_cycle_management(t_var *data)
 	data->stop_corewar = 0;
 	data->nb_live = 0;
 	//data->last_live = data->tab_champion[data->nb_champion - 1].nbr;
+	data->last_live = data->nb_champion - 1;
 	return (EXIT_SUCCESS);
 }
 
@@ -44,6 +45,7 @@ int				cycle_management(t_var *data, unsigned long nb_dump)
 			print_dump(data);
 			data->stop_corewar = 1;
 		}
+		//ft_printf("last_live = %d\n", ~data->last_live);
 		data->cycle++;
 	}
 	if (!end_dump)
@@ -55,10 +57,17 @@ int				cycle_management(t_var *data, unsigned long nb_dump)
 		//ft_printf("last_live = %u\n", ~data->last_live);
 		//ft_printf("last_live = %u\n", ~data->tab_champion[0].nbr);
 		//ft_printf("last_live = %u\n", ~data->tab_champion[1].nbr);
+		//ft_printf("last_live  = %d\n", ~data->last_live);
+		//ft_printf("pos player = %d\n", data->pos_player);
+		//ft_printf("nbr = %d\n", ~data->tab_champion[data->pos_player].nbr);
+		/*
 		ft_printf("Contestant %d, \"%s\", has won !\n",
 			~data->tab_champion[data->nb_champion - ~data->last_live -
 			1].nbr + 1, data->tab_champion[data->nb_champion
 			- ~data->last_live - 1].header.prog_name);
+		 */
+		 ft_printf("Contestant %d, \"%s\", has won !\n",
+			~data->tab_champion[data->last_live].nbr, data->tab_champion[data->last_live].header.prog_name);
 	}
 	return (EXIT_SUCCESS);
 }

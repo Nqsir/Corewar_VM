@@ -73,9 +73,12 @@ static void		ft_print_usage(void)
 {
 	ft_printf("Usage : ./corewar [-dump nbr_cycles -n number <champion1.cor>");
 	ft_printf("-n number <champion2.cor>... -v]\n");
-	ft_printf("\t-dump\t: Dumps memory after N cycles then exits\n");
-	ft_printf("\t-n\t: Champion number\n");
-	ft_printf("\t-v\t: Output mode\n");
+	ft_printf("\t-dump N\t: Dumps memory after N cycles then exits\n");
+	ft_printf("\t-n N\t: Champion number\n");
+	ft_printf(
+		"\t-v N\t: Verbosity levels, can be added together to enable several\n");
+	ft_printf("\t\t- 2\t: Show cycles\n");
+	ft_printf("\t\t- 4\t: Show operations (Params are NOT litteral ...)\n");
 	exit(EXIT_SUCCESS);
 }
 

@@ -25,9 +25,12 @@ int				opcode_live(t_var *data, t_process *p_process)
 		i = 0;
 		while (i < data->nb_champion)
 		{
-			if(data->tab_champion[i].nbr == data->t_params[0][0])
+			//ft_printf("nbr = % i || param = %i\n", data->tab_champion[i].nbr, data->t_params[0][0]);
+			if (data->tab_champion[i].nbr == data->t_params[0][0])
 			{
-				data->last_live = data->t_params[0][0];
+				//data->last_live = data->t_params[0][0];
+				data->last_live = i;
+				ft_printf("un processus dit que le joueur %u(%s) est en vie\n", ~data->tab_champion[i].nbr, data->tab_champion[i].header.prog_name);
 				break;
 			}
 			i++;
