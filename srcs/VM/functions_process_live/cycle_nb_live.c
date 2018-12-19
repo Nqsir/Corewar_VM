@@ -59,6 +59,7 @@ static int		t_process_del(t_var *data, t_process *p_process)
 			tmp_process = tmp_process->next;
 		}
 		my_free(&data->lst_free, (size_t)p_process);
+		p_process = NULL;
 		prev->next = save_next;
 	}
 	return (EXIT_SUCCESS);
@@ -85,7 +86,7 @@ static int		action_cycle_process(t_var *data)
 		data->check_cycle_delta -= CYCLE_DELTA;
 		data->check_cycle += data->check_cycle_delta;
 		data->check_max_check = MAX_CHECKS - 1;
-		if (data->v == 6)
+		if (data->v == 2 || data->v == 6)
 			ft_printf("Cycle to die is now %i\n", data->check_cycle_delta);
 	}
 	else
@@ -108,7 +109,8 @@ int				cycle_to_die(t_var *data)
 		//ft_printf("P_%i\n", p_process->id);
 		if (!p_process->nbr_live)
 			t_process_del(data, p_process);
-		p_process = p_process->next;
+		if (p_process)
+			p_process = p_process->next;
 	}
 	action_cycle_process(data);
 	update_cycle_process(data);

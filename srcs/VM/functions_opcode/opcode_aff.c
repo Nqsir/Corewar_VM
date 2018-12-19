@@ -23,15 +23,15 @@ static int		check_aff(t_var *data, unsigned int pc, int dir_oct)
 	data->op_size += 1;
 	while (i < 1)
 	{
-		if (p[i] == 0x1)
+		if (p[i] == REG_CODE)
 			data->op_size += 1;
-		else if (p[i] == 0x2)
+		else if (p[i] == DIR_CODE)
 			dir_oct == 2 ? (data->op_size += 2) : (data->op_size += 4);
-		else if (p[i] == 0x03)
+		else if (p[i] == IND_CODE)
 			data->op_size += 2;
 		i++;
 	}
-	if (!(p[0] & REG_CODE))
+	if (p[0] != REG_CODE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

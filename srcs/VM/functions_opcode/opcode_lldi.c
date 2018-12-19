@@ -27,11 +27,11 @@ static int		check_lldi(t_var *data, unsigned int pc, int dir_oct)
 	data->op_size += 1;
 	while (i < 3)
 	{
-		if (p[i] == 0x1)
+		if (p[i] == REG_CODE)
 			data->op_size += 1;
-		else if (p[i] == 0x2)
+		else if (p[i] == DIR_CODE)
 			dir_oct == 2 ? (data->op_size += 2) : (data->op_size += 4);
-		else if (p[i] == 0x03)
+		else if (p[i] == IND_CODE)
 			data->op_size += 2;
 		i++;
 	}
@@ -39,7 +39,7 @@ static int		check_lldi(t_var *data, unsigned int pc, int dir_oct)
 		test = p[1];
 	else if (p[1] == DIR_CODE)
 		test = p[1];
-	if (!(p[0] & 0x3) || !(test) || !(p[2] & REG_CODE))
+	if (!(p[0] & 0x3) || !(test) || (p[2] != REG_CODE))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

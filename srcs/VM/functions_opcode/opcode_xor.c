@@ -25,15 +25,15 @@ static int		check_xor(t_var *data, unsigned int pc, int dir_oct)
 	data->op_size += 1;
 	while (i < 3)
 	{
-		if (p[i] == 0x1)
+		if (p[i] == REG_CODE)
 			data->op_size += 1;
-		else if (p[i] == 0x2)
+		else if (p[i] == DIR_CODE)
 			dir_oct == 2 ? (data->op_size += 2) : (data->op_size += 4);
-		else if (p[i] == 0x03)
+		else if (p[i] == IND_CODE)
 			data->op_size += 2;
 		i++;
 	}
-	if (!(p[0] & 0x3) || !(p[1] & 0x3) || !(p[2] & REG_CODE))
+	if (!(p[0] & 0x3) || !(p[1] & 0x3) || (p[2] != REG_CODE))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -47,14 +47,15 @@ int				opcode_xor(t_var *data, t_process *p_process)
 			data->t_params[0][0], data->t_params[0][1], data->t_params[1][2]);
 				p_process->registre[data->t_params[1][2]].val
 					= (data->t_params[0][0] ^ data->t_params[0][1]);
-		p_process->registre[data->t_params[1][2]].val =	data->t_params[0][0] ^ data->t_params[0][1];
+		p_process->registre[data->t_params[1][2]].val
+			= data->t_params[0][0] ^ data->t_params[0][1];
 		if (p_process->registre[data->t_params[1][2]].val == 0)
 			p_process->carry = 1;
 		else
 			p_process->carry = 0;
-		p_process->pc =  ((p_process->pc + data->op_size) % MEM_SIZE);
+		p_process->pc = ((p_process->pc + data->op_size) % MEM_SIZE);
 		return (EXIT_SUCCESS);
 	}
-	p_process->pc =  ((p_process->pc + data->op_size) % MEM_SIZE);
+	p_process->pc = ((p_process->pc + data->op_size) % MEM_SIZE);
 	return (EXIT_FAILURE);
 }

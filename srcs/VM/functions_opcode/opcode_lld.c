@@ -26,11 +26,11 @@ static int		check_lld(t_var *data, unsigned int pc, int dir_oct)
 	data->op_size += 1;
 	while (i < 2)
 	{
-		if (p[i] == 0x1)
+		if (p[i] == REG_CODE)
 			data->op_size += 1;
-		else if (p[i] == 0x2)
+		else if (p[i] == DIR_CODE)
 			dir_oct == 2 ? (data->op_size += 2) : (data->op_size += 4);
-		else if (p[i] == 0x03)
+		else if (p[i] == IND_CODE)
 			data->op_size += 2;
 		i++;
 	}
@@ -38,7 +38,7 @@ static int		check_lld(t_var *data, unsigned int pc, int dir_oct)
 		test = p[0];
 	else if (p[0] == IND_CODE)
 		test = p[0];
-	if (!(test) || !(p[1] & REG_CODE))
+	if (!(test) || (p[1] != REG_CODE))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

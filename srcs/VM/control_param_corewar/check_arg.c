@@ -45,7 +45,7 @@ static void		ft_check_verbose(t_var *data, char **av, int n)
 	if (data->v > 0)
 		exit(my_exit(&data->lst_free, __FILE__, (char *)__func__, __LINE__));
 	data->v = ft_atoi(av[n]);
-	if (data->v == 4 || data->v == 6)
+	if (data->v == 2 || data->v == 4 || data->v == 6)
 		n += 1;
 	else
 		exit(my_exit(&data->lst_free, __FILE__, (char *)__func__, __LINE__));
