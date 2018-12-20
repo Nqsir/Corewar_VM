@@ -21,8 +21,8 @@ static int		check_lld(t_var *data, unsigned int pc, int dir_oct)
 
 	i = 0;
 	test = '\0';
-	p[0] = data->vm[pc + 1] >> 6;
-	p[1] = (unsigned char)(0x3 & (data->vm[pc + 1] >> 4));
+	p[0] = data->vm[((pc + 1) % MEM_SIZE)] >> 6;
+	p[1] = (unsigned char)(0x3 & (data->vm[((pc + 1) % MEM_SIZE)] >> 4));
 	data->op_size += 1;
 	while (i < 2)
 	{

@@ -21,8 +21,8 @@ static int		check_st(t_var *data, unsigned int pc, int dir_oct)
 
 	i = 0;
 	test = '\0';
-	p[0] = data->vm[pc + 1] >> 6;
-	p[1] = (unsigned char)(0x3 & (data->vm[pc + 1] >> 4));
+	p[0] = data->vm[((pc + 1) % MEM_SIZE)] >> 6;
+	p[1] = (unsigned char)(0x3 & (data->vm[((pc + 1) % MEM_SIZE)] >> 4));
 	data->op_size += 1;
 	while (i < 2)
 	{
@@ -49,7 +49,7 @@ int				opcode_st(t_var *data, t_process *p_process)
 	unsigned char	tmp_val[4];
 	int 			i;
 
-	if (!check_st(data, p_process->pc, 4) && !ft_params_opcode(data, p_process, 4, 1))
+	if (!check_st(data, p_process->pc, 4) && !ft_params_opcode(data, p_process, 4, 0))
 	{
 		if (data->t_params[1][1] == 0)
 		{
@@ -60,7 +60,7 @@ int				opcode_st(t_var *data, t_process *p_process)
 			i = 0;
 			while (i < REG_SIZE)
 			{
-				data->vm[((p_process->pc + data->t_params[0][1] + i))
+				data->vm[((p_process->pc + (data->t_params[0][1] % IDX_MOD) + i))
 					% MEM_SIZE] = tmp_val[i];
 				i++;
 			}
@@ -76,10 +76,6 @@ int				opcode_st(t_var *data, t_process *p_process)
 				ft_printf("P %4i | st r%i %i\n", p_process->id,
 					data->t_params[1][0], data->t_params[1][1]);
 		}
-		if (p_process->registre[data->t_params[1][1]].val == 0)
-			p_process->carry = 1;
-		else
-			p_process->carry = 0;
 		p_process->pc = ((p_process->pc + data->op_size) % MEM_SIZE);
 		return (EXIT_SUCCESS);
 	}

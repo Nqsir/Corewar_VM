@@ -19,7 +19,7 @@ static int		check_aff(t_var *data, unsigned int pc, int dir_oct)
 	size_t 			i;
 
 	i = 0;
-	p[i] = data->vm[pc + 1] >> 6;
+	p[i] = data->vm[((pc + 1) % MEM_SIZE)] >> 6;
 	data->op_size += 1;
 	while (i < 1)
 	{

@@ -21,9 +21,9 @@ static int		check_ldi(t_var *data, unsigned int pc, int dir_oct)
 
 	i = 0;
 	test = '\0';
-	p[0] = data->vm[pc + 1] >> 6;
-	p[1] = (unsigned char)(0x3 & (data->vm[pc + 1] >> 4));
-	p[2] = (unsigned char)(0x3 & (data->vm[pc + 1] >> 2));
+	p[0] = data->vm[((pc + 1) % MEM_SIZE)] >> 6;
+	p[1] = (unsigned char)(0x3 & (data->vm[((pc + 1) % MEM_SIZE)] >> 4));
+	p[2] = (unsigned char)(0x3 & (data->vm[((pc + 1) % MEM_SIZE)] >> 2));
 	data->op_size += 1;
 	while (i < 3)
 	{
@@ -46,7 +46,7 @@ static int		check_ldi(t_var *data, unsigned int pc, int dir_oct)
 
 int				opcode_ldi(t_var *data, t_process *p_process)
 {
-	unsigned int	tmp_adr;
+	int	tmp_adr;
 
 	if (!check_ldi(data, p_process->pc, 2) && !ft_params_opcode(data, p_process, 2, 1))
 	{
@@ -54,7 +54,7 @@ int				opcode_ldi(t_var *data, t_process *p_process)
 			ft_printf("P %4i | ldi %i %i r%i\n", p_process->id,
 				data->t_params[0][0], data->t_params[0][1],
 				data->t_params[1][2]);
-		tmp_adr = (short)(data->t_params[0][0] + data->t_params[0][1]) % IDX_MOD;
+		tmp_adr = (short)(data->t_params[0][0] + (short)data->t_params[0][1]) % IDX_MOD;
 		p_process->registre[data->t_params[1][2]].val =
 				((data->vm[(p_process->pc + tmp_adr) % MEM_SIZE] << 24)
 				   +  (data->vm[(p_process->pc + tmp_adr + 1) % MEM_SIZE] << 16)
@@ -64,11 +64,7 @@ int				opcode_ldi(t_var *data, t_process *p_process)
 			ft_printf("       | -> load from %i + %i = %i (with pc and mod %i)\n",
 				data->t_params[0][0], data->t_params[0][1],
 				(data->t_params[0][0] + data->t_params[0][1]),
-				(p_process->pc + tmp_adr) % MEM_SIZE);
-		if (p_process->registre[data->t_params[1][2]].val == 0)
-			p_process->carry = 1;
-		else
-			p_process->carry = 0;
+				(short)(p_process->pc + tmp_adr) % MEM_SIZE);
 		p_process->pc =  ((p_process->pc + data->op_size) % MEM_SIZE);
 		return (EXIT_SUCCESS);
 	}

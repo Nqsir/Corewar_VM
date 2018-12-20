@@ -20,9 +20,9 @@ static int	ft_indirect(t_var *data, t_process *proc, int idx, int *n)
 	val = (data->vm[(proc->pc + *n) % MEM_SIZE] << 8)
 		+ (data->vm[(proc->pc + (*n + 1)) % MEM_SIZE]);
 	//if (idx && data->vm[proc->pc] != 0x03)
-	if (idx && data->vm[proc->pc] != 0x03)
+	if (idx)
 		val = val % IDX_MOD;
-	if (data->vm[proc->pc] == 0x03)
+	if (proc->mem_op_code == 0x03)
 		data->t_params[0][data->p_p] = val;
 	else if (data->vm[proc->pc] == 0x0d)
 	{
