@@ -52,7 +52,7 @@ int				opcode_sti(t_var *data, t_process *p_process)
 
 	if (!check_sti(data, p_process->pc, 2) && !ft_params_opcode(data, p_process, 2, 0))
 	{
-		tmp_adr = ((p_process->pc + ((short)data->t_params[0][1] + (short)data->t_params[0][2]) % MEM_SIZE));
+		tmp_adr = (p_process->pc + (((short)data->t_params[0][1] + (short)data->t_params[0][2]) % IDX_MOD) % MEM_SIZE);
 		tmp_val[0] = (unsigned char)((data->t_params[0][0]) >> 24);
 		tmp_val[1] = (unsigned char)((data->t_params[0][0]) >> 16);
 		tmp_val[2] = (unsigned char)((data->t_params[0][0]) >> 8);

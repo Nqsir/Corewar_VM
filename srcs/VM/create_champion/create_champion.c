@@ -44,7 +44,7 @@ int				create_champion(t_var *data, unsigned int nbr,
 	ft_first_proc(data, nbr);
 	ft_memcpy(&data->vm[data->lst_process->pc],
 			  cor, data->tab_champion[data->pos_player].header.prog_size);
-	ft_printf("nbr = %i\n", ~data->tab_champion[data->pos_player].nbr);
-	ft_printf("pos = %i\n", data->pos_player);
+	//ft_printf("nbr = %i\n", ~data->tab_champion[data->pos_player].nbr);
+	//ft_printf("pos = %i\n", data->pos_player);
 	return (EXIT_SUCCESS);
 }

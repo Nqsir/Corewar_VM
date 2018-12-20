@@ -23,14 +23,15 @@ int				opcode_live(t_var *data, t_process *p_process)
 			ft_printf("P %4i | live %i\n", p_process->id,
 				data->t_params[0][0]);
 		i = 0;
+		//ft_printf("LIIIIIIIIIIIIIIIIIIIIIIIVE\n");
 		while (i < data->nb_champion)
 		{
-			//ft_printf("nbr = % i || param = %i\n", data->tab_champion[i].nbr, data->t_params[0][0]);
+		//	ft_printf("nbr = % i || param = %i\n", data->tab_champion[i].nbr, data->t_params[0][0]);
 			if (data->tab_champion[i].nbr == data->t_params[0][0])
 			{
 				//data->last_live = data->t_params[0][0];
 				data->last_live = i;
-				ft_printf("un processus dit que le joueur %u(%s) est en vie\n", ~data->tab_champion[i].nbr, data->tab_champion[i].header.prog_name);
+		//		ft_printf("un processus dit que le joueur %u(%s) est en vie\n", ~data->tab_champion[i].nbr, data->tab_champion[i].header.prog_name);
 				break;
 			}
 			i++;

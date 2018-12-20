@@ -80,9 +80,9 @@ int				opcode_st(t_var *data, t_process *p_process)
 			p_process->carry = 1;
 		else
 			p_process->carry = 0;
-		p_process->pc =  ((p_process->pc + data->op_size) % MEM_SIZE);
+		p_process->pc = ((p_process->pc + data->op_size) % MEM_SIZE);
 		return (EXIT_SUCCESS);
 	}
-	p_process->pc =  ((p_process->pc + data->op_size) % MEM_SIZE);
+	p_process->pc = ((p_process->pc + data->op_size) % MEM_SIZE);
 	return (EXIT_FAILURE);
 }

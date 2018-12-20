@@ -21,7 +21,7 @@ static int		init_cycle_management(t_var *data)
 	data->stop_corewar = 0;
 	data->nb_live = 0;
 	//data->last_live = data->tab_champion[data->nb_champion - 1].nbr;
-	data->last_live = data->nb_champion - 1;
+	data->last_live = 0;
 	return (EXIT_SUCCESS);
 }
 
@@ -67,7 +67,7 @@ int				cycle_management(t_var *data, unsigned long nb_dump)
 			- ~data->last_live - 1].header.prog_name);
 		 */
 		 ft_printf("Contestant %d, \"%s\", has won !\n",
-			~data->tab_champion[data->last_live].nbr, data->tab_champion[data->last_live].header.prog_name);
+			~data->tab_champion[data->last_live].nbr + 1, data->tab_champion[data->last_live].header.prog_name);
 	}
 	return (EXIT_SUCCESS);
 }
