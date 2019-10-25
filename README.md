@@ -1,6 +1,6 @@
 # Corewar
 
-Projet réalisé en équipe avec Victor STEYAERT ([https://github.com/Nqsir](https://github.com/Nqsir)).
+Projet réalisé en équipe avec Freddy Pupier (https://github.com/pups-enterprise).
 
 Ce projet demande de realiser un compilateur de code ASM ainsi qu'une machine virtuel pour execution de programme appeler "Champion".
 
