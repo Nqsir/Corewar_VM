@@ -5,60 +5,68 @@
 #                                                 +:+:+   +:    +:  +:+:+    #
 #   By: fablin <fablin@student.42.fr>              +:+   +:    +:    +:+     #
 #                                                 #+#   #+    #+    #+#      #
-#   Created: 2018/10/08 18:51:13 by fablin       #+#   ##    ##    #+#       #
-#   Updated: 2018/10/11 19:07:00 by fablin      ###    #+. /#+    ###.fr     #
+#   Created: 2018/12/14 17:52:22 by fablin       #+#   ##    ##    #+#       #
+#   Updated: 2018/12/21 17:10:15 by fablin      ###    #+. /#+    ###.fr     #
 #                                                         /                  #
 #                                                        /                   #
 # ************************************************************************** #
 
-SRC_DIR =	./src/corewar/
+FLAGS = -Wall -Wextra -Werror
 
-OBJ_DIR =	./obj/
+INC_DIR = ./inc/
 
-INC_DIR =	./inc/
+ASM = ./asm
 
-NAME =		corewar
+COREWAR = ./corewar
 
-CFILES =	main.c exit.c
+DECOMPILER = ./decompiler
 
-SOURCES =	$(addprefix $(SRC_DIR), $(CFILES))
+all : libft
+	@make -C ./src/asm/
+	@make -C ./src/corewar/
+	@make -C ./src/decompiler/
 
-OFILES =	$(CFILES:.c=.o) $(FT_PRINTF:.c=.o)
+libft :
+	@make -C ./lib/libft/
+	@make -C ./lib/libft_vm/
 
-OBJECTS =	$(addprefix $(OBJ_DIR), $(OFILES))
+$(ASM) :
+	@make -C ./src/asm/
 
-FLAGS =		-Wall -Wextra -Werror
+$(COREWAR) :
+	@make -C ./src/corewar/
 
-all : $(NAME)
+$(DECOMPILER) :
+	@make -C ./src/decompiler/
 
-$(NAME) : obj $(OBJECTS)
-	@make -C ./lib/libft
-	gcc $(FLAGS) $(OBJECTS) -L ./lib/libft/ -lft -o $(NAME)
-
-$(OBJ_DIR)%.o : $(SRC_DIR)%.c
-	gcc $(FLAGS) -c $< -o $@ -I $(INC_DIR) -I ./lib/libft/inc/
-
-obj :
-	@mkdir -p $(OBJ_DIR)
-
-clean : obj
+clean :
 	@make clean -C ./lib/libft/
-	@rm -rf $(OBJ_DIR)
+	@make clean -C ./lib/libft_vm/
+	@make clean -C ./src/asm/
+	@make clean -C ./src/corewar/
+	@make clean -C ./src/decompiler/
 
-fclean : obj
+fclean :
 	@make fclean -C ./lib/libft/
-	@rm -rf $(NAME)
-	@rm -rf $(OBJ_DIR)
+	@make fclean -C ./lib/libft_vm/
+	@make fclean -C ./src/asm/
+	@make fclean -C ./src/corewar/
+	@make fclean -C ./src/decompiler/
 
-re : fclean all
+re :
+	@make re -C ./lib/libft/
+	@make re -C ./lib/libft_vm/
+	@make re -C ./src/asm/
+	@make re -C ./src/corewar/
+	@make re -C ./src/decompiler/
 
-install :
-	curl -fsSL https://rawgit.com/kube/42homebrew/master/install.sh | zsh
-	brew install npm
-	brew install soket.io
+debug_asm : libft
+	make debug -C ./src/asm/
 
-test :
-	@make -C ./lib/libft
-	gcc $(SOURCES) -L ./lib/libft/ -lft -o test_corewar -I $(INC_DIR) -I ./lib/libft/inc/
+debug_corewar : libft
+	make debug -C ./src/corewar/
 
-.PHONY: all clean fclean re obj
+debug_decompiler : libft
+	make debug -C ./src/decompiler/
+
+.PHONY: all clean fclean re libft corewar asm
